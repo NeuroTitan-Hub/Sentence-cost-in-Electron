@@ -1,0 +1,61 @@
+qwen3 eng_Latn tok/sent, ratio [lo,hi]                     27.3  1.00 [1.00, 1.00]
+qwen3 ory_Orya tok/sent, ratio [lo,hi]                     264.7  9.70 [9.57, 9.83]
+qwen3 shn_Mymr tok/sent, ratio [lo,hi]                     284.7  10.43 [10.26, 10.60]
+qwen3 languages, Odia rank                                 204  rank 2
+tokenizers                                                 8 ['bloom', 'cl100k', 'deepseek-v3', 'gpt2', 'mistral-nemo', 'o200k', 'qwen3', 'utf8-bytes']
+Odia ratio per tokenizer                                   {'bloom': 1.3683, 'cl100k': 12.4006, 'deepseek-v3': 5.5455, 'gpt2': 13.2631, 'mistral-nemo': 12.8666, 'o200k': 4.985, 'qwen3': 9.6989, 'utf8-bytes': 2.7363}
+per-layer parts (M): Q, KV, O, MLP                         [16.8, 8.4, 16.8, 151.0]
+per layer, x36, head, M_lin                                192.9M 6.95G 0.62G 7.568G (json 7.568G)
+attn per ctx 2*l*H*h                                       294912
+attention at 8192 and share of total                       2.42G  0.242
+json ctx rows                                              [1, 128, 512, 2048, 8192, 32768]
+k bytes/token, weights GB                                  147456  15.14
+  Tibetan                                                  out 3937 pred 8.3 meas 8.1
+  Southern Pashto                                          out 4164 pred 6.3 meas 8.0
+  Tigrinya                                                 out 3695 pred 6.4 meas 6.9
+  Shan                                                     out 4667 pred 10.7 meas 6.7
+  Amharic                                                  out 2276 pred 4.7 meas 4.6
+  Sinhala                                                  out 2351 pred 6.2 meas 3.3
+n languages                                                117
+spearman time (base), baselines                            0.937 {'output length alone': 0.8380086721347095, 'prompt length alone': 0.9297087095413308, 'mean context (P_eng 220)': 0.9369307284594344}
+top over-predictions                                       [('Burmese', 2.48), ('Maltese', 2.39), ('Eastern Panjabi', 2.31), ('Fulfulde', 2.26), ('Sindhi', 2.23), ('Gujarati', 2.23), ('Odia', 2.2), ('Kannada', 2.2)]
+floor max ratio at P=220 over KV and e_bit                 2.98 to 4.61
+max measured ratio                                         8.08
+implied English power W (ideal roofline)                   861
+deng columns                                               ['language', 'code', 'resource', 'j_per_tok', 'output_tokens', 'total_energy_j', 'accuracy']
+Deng J/token max/min, total max/min                        8.31  178.9  (n=122)
+inverter e_dyn tt 1.8 / 0.5 (fJ), V^2 pred                 12.23 / 0.69  pred 0.94
+tt inverter delay factor per 100 mV                        [(0.25, 0.3, 8.5), (0.3, 0.35, 9.6), (0.35, 0.4, 9.8), (0.4, 0.45, 9.6), (0.45, 0.5, 9.3), (0.5, 0.6, 8.0), (0.6, 0.7, 5.7), (0.7, 0.8, 3.8), (0.8, 0.9, 2.5), (0.9, 1.0, 1.8), (1.0, 1.2, 1.4), (1.2, 1.4, 1.2), (1.4, 1.6, 1.2), (1.6, 1.8, 1.1)]
+MAC tt 1.8 / 0.5 pJ, slowdown, saving                      1.245 / 0.1012  4941x  12.3x
+mep.json keys / tt keys                                    ['L', 'alphas', 'corners'] / ['vdd', 'dropped_unresolved_vdd', 'e_dyn', 'tpd', 'p_leak', 'leak_frac', 'per_alpha']
+SRAM e_read tt 1.8 / 0.5 fJ, 156/e18                       14.84 / 1.63  10.5x
+Odia token_ratio, N1_b1 ratio, share weights               9.699 9.754 0.976
+Odia N20_b64 ratio [lo,hi]                                 16.466 [13.93, 31.45]
+Odia N200_b64 ratio [lo,hi]                                24.21 [20.969, 62.903]
+N1_b1 share weights range                                  0.975 to 0.984
+weights read 2*M_lin*8*7.5pJ                               0.908 J
+English sentence MAC (prefill, causal attn)                206.7 G  linear only 206.6 G
+electrons eng 1.8 V                                        E 0.255 J  N 8.83e+17
+electrons ory 1.8 V                                        E 2.51 J  N 8.71e+18
+electrons eng 0.5 V                                        E 0.0207 J  N 2.58e+17
+electrons ory 0.5 V                                        E 0.204 J  N 2.55e+18
+logic tt guarded fJ                                        {1.8: 1245, 1.0: 336, 0.7: 156, 0.6: 123, 0.5: 134, 0.45: 180}
+logic ss guarded fJ                                        {1.8: 1252, 1.0: 326, 0.7: 148, 0.6: 119, 0.5: 150, 0.45: 262}
+logic ff guarded fJ                                        {1.8: 1276, 1.0: 353, 0.7: 182, 0.6: 185, 0.5: 382, 0.45: 684}
+logic tt nominal fJ                                        {1.8: 1245.4, 1.0: 342.4, 0.7: 154.9, 0.6: 116.1, 0.5: 101.2, 0.45: 120.9}
+logic tt sd/mean                                           {1.8: 0.02, 1.0: 0.07, 0.7: 0.25, 0.5: 0.47}
+wrong copies                                               {('ff', 0.45): '0.02'}
+SRAM MC cells per point                                    ['1000']
+SRAM read fail % tt                                        {1.0: 0.0, 0.9: 0.0, 0.8: 0.0, 0.7: 0.5, 0.6: 15.4, 0.5: 69.6}
+SRAM read fail % ff                                        {1.0: 0.0, 0.9: 0.0, 0.8: 0.0, 0.7: 0.4, 0.6: 5.5, 0.5: 33.5}
+SRAM read fail % ss                                        {1.0: 0.0, 0.9: 0.0, 0.8: 3.8, 0.7: 27.0, 0.6: 92.0, 0.5: 100.0}
+SRAM read fail % sf                                        {1.0: 3.9, 0.9: 21.6, 0.8: 63.1, 0.7: 95.0, 0.6: 100.0, 0.5: 100.0}
+SRAM fs write fail % 1.0 / 0.6                             0.1 / 16.0
+hold fail % ss / sf at 0.5                                 83.0 / 92.5
+SRAM mu/sd >= 6 down to V, tt read/write                   1.0 / 0.9
+SRAM mu/sd >= 6 down to V, ff read/write                   1.0 / 0.8
+SRAM mu/sd >= 6 down to V, ss read/write                   1.2 / 1.0
+SRAM mu/sd >= 6 down to V, sf read/write                   1.8 / 1.2
+SRAM mu/sd >= 6 down to V, fs read/write                   0.7 / 1.4
+sf read mu/sd by V                                         {0.5: -1.2, 0.6: -1.1, 0.7: 0.1, 0.8: 0.5, 0.9: 1.1, 1.0: 2.0, 1.2: 4.1, 1.4: 5.8, 1.8: 7.3}
+1 MB cells, p, z                                           8.39e+06 1.2e-09 5.97
