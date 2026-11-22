@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "model": "qwen3.5-4b-finetune-q4km",
+    "reps": 3,
+    "nsent": 20,
+    "num_ctx": 12288,
+    "maxout": 6000,
+    "langs": [
+      "eng_Latn",
+      "fra_Latn",
+      "deu_Latn",
+      "spa_Latn",
+      "rus_Cyrl",
+      "arb_Arab",
+      "zho_Hans",
+      "jpn_Jpan",
+      "kor_Hang",
+      "hin_Deva",
+      "ben_Beng",
+      "tam_Taml",
+      "tel_Telu",
+      "ory_Orya",
+      "amh_Ethi",
+      "mya_Mymr",
+      "khm_Khmr",
+      "shn_Mymr"
+    ],
+    "prompts": {
+      "read": "Here is a text. Do not answer it. Reply with only the word OK.\n\n{text}",
+      "copy": "Copy the following text exactly, in its original language, with no other words:\n\n{text}"
+    },
+    "started": "2026-11-22T13:14:40",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 595.71, 98.29 W",
+    "ollama": "0.31.2",
+    "idle_w_start": 21.202323943661973,
+    "idle_w_end": 15.683714285714288,
+    "finished": "2026-11-22T14:00:47",
+    "regime": "battery",
+    "t_split": 1795335053.0
+  },
+  "fits": {
+    "energy_j": {
+      "fixed_j_per_request": 20.11554302622062,
+      "j_per_prompt_token": 0.02595338139302953,
+      "se_j_per_prompt_token": 0.001332000646258052,
+      "r2": 0.9571406428557853,
+      "n_points": 19
+    },
+    "energy_above_idle_j": {
+      "fixed_j_per_request": 7.309962813011573,
+      "j_per_prompt_token": 0.011191429595010348,
+      "se_j_per_prompt_token": 0.0014724511407733017,
+      "r2": 0.7726308176878829,
+      "n_points": 19
+    },
+    "wall_s_read": {
+      "fixed_s_per_request": 0.6039499833187654,
+      "s_per_prompt_token": 0.0006962538340942287,
+      "r2": 0.909516919921741
+    }
+  },
+  "spearman_energy_vs_tokens": 0.9896800825593395,
+  "log_slope_energy_vs_tokens": 0.9154012670771319,
+  "j_per_output_token_vs_context": {
+    "intercept_j": 1.096688636892721,
+    "j_per_context_token": 8.178111113076654e-06,
+    "r2": 0.02587846137912575,
+    "se": 1.2543835869048264e-05
+  },
+  "per_output_token_range_j": [
+    0.9127417719329987,
+    1.2557435933168364
+  ]
+}
