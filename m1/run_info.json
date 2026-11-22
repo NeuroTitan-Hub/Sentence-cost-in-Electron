@@ -1,0 +1,57 @@
+{
+  "python": "3.13.5",
+  "numpy": "2.2.6",
+  "seed": 20261119,
+  "n_boot": 2000,
+  "languages": 204,
+  "tokenizers": {
+    "gpt2": {
+      "kind": "tiktoken",
+      "source": "gpt2",
+      "tiktoken": "0.13.0"
+    },
+    "cl100k": {
+      "kind": "tiktoken",
+      "source": "cl100k_base",
+      "tiktoken": "0.13.0"
+    },
+    "o200k": {
+      "kind": "tiktoken",
+      "source": "o200k_base",
+      "tiktoken": "0.13.0"
+    },
+    "qwen3": {
+      "kind": "hf",
+      "source": "Qwen/Qwen3-8B",
+      "tokenizers": "0.23.1",
+      "file": "tokenizer.json",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218"
+    },
+    "deepseek-v3": {
+      "kind": "hf",
+      "source": "deepseek-ai/DeepSeek-V3",
+      "tokenizers": "0.23.1",
+      "file": "tokenizer.json",
+      "revision": "e815299b0bcbac849fa540c768ef21845365c9eb"
+    },
+    "mistral-nemo": {
+      "kind": "hf",
+      "source": "mistralai/Mistral-Nemo-Instruct-2407",
+      "tokenizers": "0.23.1",
+      "file": "tokenizer.json",
+      "revision": "04d8a90549d23fc6bd7f642064003592df51e9b3"
+    },
+    "bloom": {
+      "kind": "hf",
+      "source": "bigscience/bloom",
+      "tokenizers": "0.23.1",
+      "file": "tokenizer.json",
+      "revision": "7f10a99ce7c08f03c7719a586cb2cbda1433ac05"
+    },
+    "utf8-bytes": {
+      "kind": "bytes",
+      "source": "UTF-8 byte count (ByT5-style byte model)"
+    }
+  },
+  "seconds": 60.2
+}
