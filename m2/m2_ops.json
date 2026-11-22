@@ -1,0 +1,1647 @@
+{
+  "models": {
+    "Qwen3-0.6B": {
+      "shapes": {
+        "d": 1024,
+        "i": 3072,
+        "L": 28,
+        "H": 16,
+        "KV": 8,
+        "hd": 128,
+        "V": 151936,
+        "tied": true,
+        "per_layer_linear": 15728640
+      },
+      "linear_params": 595984384,
+      "per_ctx": [
+        {
+          "ctx": 1,
+          "mac_linear": 440401920,
+          "mac_attention": 114688,
+          "mac_lm_head": 155582464,
+          "mac_total": 596099072,
+          "byte_weights_per_token": 1191968768.0,
+          "byte_kv_read": 114688,
+          "byte_kv_write": 114688,
+          "byte_total": 1192198144.0,
+          "attention_share": 0.0001923975483055273,
+          "kv_share_of_bytes_batch1": 9.619877415276365e-05,
+          "kv_share_of_bytes_batch64": 0.006082989354768629
+        },
+        {
+          "ctx": 128,
+          "mac_linear": 440401920,
+          "mac_attention": 14680064,
+          "mac_lm_head": 155582464,
+          "mac_total": 610664448,
+          "byte_weights_per_token": 1191968768.0,
+          "byte_kv_read": 14680064,
+          "byte_kv_write": 114688,
+          "byte_total": 1206763520.0,
+          "attention_share": 0.024039493453530802,
+          "kv_share_of_bytes_batch1": 0.012164822483198697,
+          "kv_share_of_bytes_batch64": 0.43926951832332395
+        },
+        {
+          "ctx": 512,
+          "mac_linear": 440401920,
+          "mac_attention": 58720256,
+          "mac_lm_head": 155582464,
+          "mac_total": 654704640,
+          "byte_weights_per_token": 1191968768.0,
+          "byte_kv_read": 58720256,
+          "byte_kv_write": 114688,
+          "byte_total": 1250803712.0,
+          "attention_share": 0.08968968968968968,
+          "kv_share_of_bytes_batch1": 0.04694601993633994,
+          "kv_share_of_bytes_batch64": 0.758077309502406
+        },
+        {
+          "ctx": 2048,
+          "mac_linear": 440401920,
+          "mac_attention": 234881024,
+          "mac_lm_head": 155582464,
+          "mac_total": 830865408,
+          "byte_weights_per_token": 1191968768.0,
+          "byte_kv_read": 234881024,
+          "byte_kv_write": 114688,
+          "byte_total": 1426964480.0,
+          "attention_share": 0.282694431298312,
+          "kv_share_of_bytes_batch1": 0.16460187151960504,
+          "kv_share_of_bytes_batch64": 0.9261131478221547
+        },
+        {
+          "ctx": 8192,
+          "mac_linear": 440401920,
+          "mac_attention": 939524096,
+          "mac_lm_head": 155582464,
+          "mac_total": 1535508480,
+          "byte_weights_per_token": 1191968768.0,
+          "byte_kv_read": 939524096,
+          "byte_kv_write": 114688,
+          "byte_total": 2131607552.0,
+          "attention_share": 0.6118651301749893,
+          "kv_share_of_bytes_batch1": 0.4407584759767261,
+          "kv_share_of_bytes_batch64": 0.9804446230193502
+        },
+        {
+          "ctx": 32768,
+          "mac_linear": 440401920,
+          "mac_attention": 3758096384,
+          "mac_lm_head": 155582464,
+          "mac_total": 4354080768,
+          "byte_weights_per_token": 1191968768.0,
+          "byte_kv_read": 3758096384,
+          "byte_kv_write": 114688,
+          "byte_total": 4950179840.0,
+          "attention_share": 0.8631205033264095,
+          "kv_share_of_bytes_batch1": 0.7591838085623976,
+          "kv_share_of_bytes_batch64": 0.9950383860818867
+        }
+      ]
+    },
+    "Qwen3-14B": {
+      "shapes": {
+        "d": 5120,
+        "i": 17408,
+        "L": 40,
+        "H": 40,
+        "KV": 8,
+        "hd": 128,
+        "V": 151936,
+        "tied": false,
+        "per_layer_linear": 330301440
+      },
+      "linear_params": 13989969920,
+      "per_ctx": [
+        {
+          "ctx": 1,
+          "mac_linear": 13212057600,
+          "mac_attention": 409600,
+          "mac_lm_head": 777912320,
+          "mac_total": 13990379520,
+          "byte_weights_per_token": 27979939840.0,
+          "byte_kv_read": 163840,
+          "byte_kv_write": 163840,
+          "byte_total": 27980267520.0,
+          "attention_share": 2.9277261522066272e-05,
+          "kv_share_of_bytes_batch1": 5.855555165185212e-06,
+          "kv_share_of_bytes_batch64": 0.0003744792398071432
+        },
+        {
+          "ctx": 128,
+          "mac_linear": 13212057600,
+          "mac_attention": 52428800,
+          "mac_lm_head": 777912320,
+          "mac_total": 14042398720,
+          "byte_weights_per_token": 27979939840.0,
+          "byte_kv_read": 20971520,
+          "byte_kv_write": 163840,
+          "byte_total": 28001075200.0,
+          "attention_share": 0.0037336071311896207,
+          "kv_share_of_bytes_batch1": 0.0007489540973055207,
+          "kv_share_of_bytes_batch64": 0.04575718307341704
+        },
+        {
+          "ctx": 512,
+          "mac_linear": 13212057600,
+          "mac_attention": 209715200,
+          "mac_lm_head": 777912320,
+          "mac_total": 14199685120,
+          "byte_weights_per_token": 27979939840.0,
+          "byte_kv_read": 83886080,
+          "byte_kv_write": 163840,
+          "byte_total": 28063989760.0,
+          "attention_share": 0.01476900355379148,
+          "kv_share_of_bytes_batch1": 0.002989100292488134,
+          "kv_share_of_bytes_batch64": 0.16093670189776432
+        },
+        {
+          "ctx": 2048,
+          "mac_linear": 13212057600,
+          "mac_attention": 838860800,
+          "mac_lm_head": 777912320,
+          "mac_total": 14828830720,
+          "byte_weights_per_token": 27979939840.0,
+          "byte_kv_read": 335544320,
+          "byte_kv_write": 163840,
+          "byte_total": 28315648000.0,
+          "attention_share": 0.056569585009059974,
+          "kv_share_of_bytes_batch1": 0.011850137422247938,
+          "kv_share_of_bytes_batch64": 0.43413974933093086
+        },
+        {
+          "ctx": 8192,
+          "mac_linear": 13212057600,
+          "mac_attention": 3355443200,
+          "mac_lm_head": 777912320,
+          "mac_total": 17345413120,
+          "byte_weights_per_token": 27979939840.0,
+          "byte_kv_read": 1342177280,
+          "byte_kv_write": 163840,
+          "byte_total": 29322280960.0,
+          "attention_share": 0.19344844523368723,
+          "kv_share_of_bytes_batch1": 0.045773290346372834,
+          "kv_share_of_bytes_batch64": 0.7542323140486357
+        },
+        {
+          "ctx": 32768,
+          "mac_linear": 13212057600,
+          "mac_attention": 13421772800,
+          "mac_lm_head": 777912320,
+          "mac_total": 27411742720,
+          "byte_weights_per_token": 27979939840.0,
+          "byte_kv_read": 5368709120,
+          "byte_kv_write": 163840,
+          "byte_total": 33348812800.0,
+          "attention_share": 0.48963588112941403,
+          "kv_share_of_bytes_batch1": 0.16098651403866468,
+          "kv_share_of_bytes_batch64": 0.9246734556382915
+        }
+      ]
+    },
+    "Qwen3-32B": {
+      "shapes": {
+        "d": 5120,
+        "i": 25600,
+        "L": 64,
+        "H": 64,
+        "KV": 8,
+        "hd": 128,
+        "V": 151936,
+        "tied": false,
+        "per_layer_linear": 487587840
+      },
+      "linear_params": 31983534080,
+      "per_ctx": [
+        {
+          "ctx": 1,
+          "mac_linear": 31205621760,
+          "mac_attention": 1048576,
+          "mac_lm_head": 777912320,
+          "mac_total": 31984582656,
+          "byte_weights_per_token": 63967068160.0,
+          "byte_kv_read": 262144,
+          "byte_kv_write": 262144,
+          "byte_total": 63967592448.0,
+          "attention_share": 3.278379497014626e-05,
+          "kv_share_of_bytes_batch1": 4.098075134109509e-06,
+          "kv_share_of_bytes_batch64": 0.0002621414498879755
+        },
+        {
+          "ctx": 128,
+          "mac_linear": 31205621760,
+          "mac_attention": 134217728,
+          "mac_lm_head": 777912320,
+          "mac_total": 32117751808,
+          "byte_weights_per_token": 63967068160.0,
+          "byte_kv_read": 33554432,
+          "byte_kv_write": 262144,
+          "byte_total": 64000884736.0,
+          "attention_share": 0.0041789266198441885,
+          "kv_share_of_bytes_batch1": 0.0005242807523428796,
+          "kv_share_of_bytes_batch64": 0.03247301513055405
+        },
+        {
+          "ctx": 512,
+          "mac_linear": 31205621760,
+          "mac_attention": 536870912,
+          "mac_lm_head": 777912320,
+          "mac_total": 32520404992,
+          "byte_weights_per_token": 63967068160.0,
+          "byte_kv_read": 134217728,
+          "byte_kv_write": 262144,
+          "byte_total": 64101548032.0,
+          "attention_share": 0.016508740039740278,
+          "kv_share_of_bytes_batch1": 0.0020938297454688214,
+          "kv_share_of_bytes_batch64": 0.11836140539720495
+        },
+        {
+          "ctx": 2048,
+          "mac_linear": 31205621760,
+          "mac_attention": 2147483648,
+          "mac_lm_head": 777912320,
+          "mac_total": 34131017728,
+          "byte_weights_per_token": 63967068160.0,
+          "byte_kv_read": 536870912,
+          "byte_kv_write": 262144,
+          "byte_total": 64504201216.0,
+          "attention_share": 0.06291882841331956,
+          "kv_share_of_bytes_batch1": 0.008323037908836725,
+          "kv_share_of_bytes_batch64": 0.34938464778182654
+        },
+        {
+          "ctx": 8192,
+          "mac_linear": 31205621760,
+          "mac_attention": 8589934592,
+          "mac_lm_head": 777912320,
+          "mac_total": 40573468672,
+          "byte_weights_per_token": 63967068160.0,
+          "byte_kv_read": 2147483648,
+          "byte_kv_write": 262144,
+          "byte_total": 66114813952.0,
+          "attention_share": 0.2117130941266544,
+          "kv_share_of_bytes_batch1": 0.03248112668908203,
+          "kv_share_of_bytes_batch64": 0.682340600260032
+        },
+        {
+          "ctx": 32768,
+          "mac_linear": 31205621760,
+          "mac_attention": 34359738368,
+          "mac_lm_head": 777912320,
+          "mac_total": 66343272448,
+          "byte_weights_per_token": 63967068160.0,
+          "byte_kv_read": 8589934592,
+          "byte_kv_write": 262144,
+          "byte_total": 72557264896.0,
+          "attention_share": 0.5179084042761267,
+          "kv_share_of_bytes_batch1": 0.11838834614717614,
+          "kv_share_of_bytes_batch64": 0.8957475789445809
+        }
+      ]
+    },
+    "Qwen3-8B": {
+      "shapes": {
+        "d": 4096,
+        "i": 12288,
+        "L": 36,
+        "H": 32,
+        "KV": 8,
+        "hd": 128,
+        "V": 151936,
+        "tied": false,
+        "per_layer_linear": 192937984
+      },
+      "linear_params": 7568097280,
+      "per_ctx": [
+        {
+          "ctx": 1,
+          "mac_linear": 6945767424,
+          "mac_attention": 294912,
+          "mac_lm_head": 622329856,
+          "mac_total": 7568392192,
+          "byte_weights_per_token": 15136194560.0,
+          "byte_kv_read": 147456,
+          "byte_kv_write": 147456,
+          "byte_total": 15136489472.0,
+          "attention_share": 3.896626820049444e-05,
+          "kv_share_of_bytes_batch1": 9.741756850078691e-06,
+          "kv_share_of_bytes_batch64": 0.000622708088286169
+        },
+        {
+          "ctx": 128,
+          "mac_linear": 6945767424,
+          "mac_attention": 37748736,
+          "mac_lm_head": 622329856,
+          "mac_total": 7605846016,
+          "byte_weights_per_token": 15136194560.0,
+          "byte_kv_read": 18874368,
+          "byte_kv_write": 147456,
+          "byte_total": 15155216384.0,
+          "attention_share": 0.004963121251809471,
+          "kv_share_of_bytes_batch1": 0.0012454040590226389,
+          "kv_share_of_bytes_batch64": 0.07386509361374712
+        },
+        {
+          "ctx": 512,
+          "mac_linear": 6945767424,
+          "mac_attention": 150994944,
+          "mac_lm_head": 622329856,
+          "mac_total": 7719092224,
+          "byte_weights_per_token": 15136194560.0,
+          "byte_kv_read": 75497472,
+          "byte_kv_write": 147456,
+          "byte_total": 15211839488.0,
+          "attention_share": 0.01956123072743327,
+          "kv_share_of_bytes_batch1": 0.0049630731417825485,
+          "kv_share_of_bytes_batch64": 0.24186437119462523
+        },
+        {
+          "ctx": 2048,
+          "mac_linear": 6945767424,
+          "mac_attention": 603979776,
+          "mac_lm_head": 622329856,
+          "mac_total": 8172077056,
+          "byte_weights_per_token": 15136194560.0,
+          "byte_kv_read": 301989888,
+          "byte_kv_write": 147456,
+          "byte_total": 15438331904.0,
+          "attention_share": 0.07390774363251428,
+          "kv_share_of_bytes_batch1": 0.019561043892426994,
+          "kv_share_of_bytes_batch64": 0.560652147463195
+        },
+        {
+          "ctx": 8192,
+          "mac_linear": 6945767424,
+          "mac_attention": 2415919104,
+          "mac_lm_head": 622329856,
+          "mac_total": 9984016384,
+          "byte_weights_per_token": 15136194560.0,
+          "byte_kv_read": 1207959552,
+          "byte_kv_write": 147456,
+          "byte_total": 16344301568.0,
+          "attention_share": 0.24197867982985874,
+          "kv_share_of_bytes_batch1": 0.07390707684720077,
+          "kv_share_of_bytes_batch64": 0.8361838225286939
+        },
+        {
+          "ctx": 32768,
+          "mac_linear": 6945767424,
+          "mac_attention": 9663676416,
+          "mac_lm_head": 622329856,
+          "mac_total": 17231773696,
+          "byte_weights_per_token": 15136194560.0,
+          "byte_kv_read": 4831838208,
+          "byte_kv_write": 147456,
+          "byte_total": 19968180224.0,
+          "attention_share": 0.5608056713420756,
+          "kv_share_of_bytes_batch1": 0.24197689292650487,
+          "kv_share_of_bytes_batch64": 0.9533094557726374
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "ctx": 1,
+      "counted_macs": 596099072,
+      "formula_macs": 596099072
+    },
+    {
+      "ctx": 64,
+      "counted_macs": 603324416,
+      "formula_macs": 603324416
+    },
+    {
+      "ctx": 300,
+      "counted_macs": 630390784,
+      "formula_macs": 630390784
+    }
+  ],
+  "qwen3_8b_sentence_prefill": [
+    {
+      "lang": "shn_Mymr",
+      "tokens_per_sentence": 284.719,
+      "prefill_gmacs": 2168.92686336,
+      "ratio_to_eng": 10.608587760016231
+    },
+    {
+      "lang": "ory_Orya",
+      "tokens_per_sentence": 264.716,
+      "prefill_gmacs": 2015.93995264,
+      "ratio_to_eng": 9.860302930350445
+    },
+    {
+      "lang": "mya_Mymr",
+      "tokens_per_sentence": 243.687,
+      "prefill_gmacs": 1855.430656,
+      "ratio_to_eng": 9.075224840134874
+    },
+    {
+      "lang": "sat_Olck",
+      "tokens_per_sentence": 243.452,
+      "prefill_gmacs": 1847.790600192,
+      "ratio_to_eng": 9.037856036280864
+    },
+    {
+      "lang": "dzo_Tibt",
+      "tokens_per_sentence": 219.163,
+      "prefill_gmacs": 1664.5177344,
+      "ratio_to_eng": 8.141437483111146
+    },
+    {
+      "lang": "pan_Guru",
+      "tokens_per_sentence": 198.604,
+      "prefill_gmacs": 1511.92010752,
+      "ratio_to_eng": 7.39505670648189
+    },
+    {
+      "lang": "bod_Tibt",
+      "tokens_per_sentence": 197.292,
+      "prefill_gmacs": 1496.666832896,
+      "ratio_to_eng": 7.320450363036239
+    },
+    {
+      "lang": "mal_Mlym",
+      "tokens_per_sentence": 197.216,
+      "prefill_gmacs": 1496.666832896,
+      "ratio_to_eng": 7.320450363036239
+    },
+    {
+      "lang": "tel_Telu",
+      "tokens_per_sentence": 190.904,
+      "prefill_gmacs": 1450.914086912,
+      "ratio_to_eng": 7.0966659518454085
+    },
+    {
+      "lang": "kan_Knda",
+      "tokens_per_sentence": 188.942,
+      "prefill_gmacs": 1435.66553088,
+      "ratio_to_eng": 7.022082687830505
+    },
+    {
+      "lang": "sin_Sinh",
+      "tokens_per_sentence": 187.704,
+      "prefill_gmacs": 1428.041695232,
+      "ratio_to_eng": 6.984793219519684
+    },
+    {
+      "lang": "guj_Gujr",
+      "tokens_per_sentence": 183.912,
+      "prefill_gmacs": 1397.54930176,
+      "ratio_to_eng": 6.835649770920622
+    },
+    {
+      "lang": "khm_Khmr",
+      "tokens_per_sentence": 176.578,
+      "prefill_gmacs": 1344.198967296,
+      "ratio_to_eng": 6.574704270752496
+    },
+    {
+      "lang": "tam_Taml",
+      "tokens_per_sentence": 166.826,
+      "prefill_gmacs": 1268.009271296,
+      "ratio_to_eng": 6.202047594273864
+    },
+    {
+      "lang": "lao_Laoo",
+      "tokens_per_sentence": 155.368,
+      "prefill_gmacs": 1176.62056448,
+      "ratio_to_eng": 5.755049987803162
+    },
+    {
+      "lang": "mni_Beng",
+      "tokens_per_sentence": 153.058,
+      "prefill_gmacs": 1161.393242112,
+      "ratio_to_eng": 5.680570581226614
+    },
+    {
+      "lang": "asm_Beng",
+      "tokens_per_sentence": 147.006,
+      "prefill_gmacs": 1115.718352896,
+      "ratio_to_eng": 5.4571669806430885
+    },
+    {
+      "lang": "hye_Armn",
+      "tokens_per_sentence": 143.938,
+      "prefill_gmacs": 1092.8848896,
+      "ratio_to_eng": 5.345484653621018
+    },
+    {
+      "lang": "taq_Tfng",
+      "tokens_per_sentence": 144.264,
+      "prefill_gmacs": 1092.8848896,
+      "ratio_to_eng": 5.345484653621018
+    },
+    {
+      "lang": "kat_Geor",
+      "tokens_per_sentence": 141.639,
+      "prefill_gmacs": 1077.664055296,
+      "ratio_to_eng": 5.271036981261746
+    },
+    {
+      "lang": "ben_Beng",
+      "tokens_per_sentence": 137.168,
+      "prefill_gmacs": 1039.617130496,
+      "ratio_to_eng": 5.084943043490943
+    },
+    {
+      "lang": "tzm_Tfng",
+      "tokens_per_sentence": 137.088,
+      "prefill_gmacs": 1039.617130496,
+      "ratio_to_eng": 5.084943043490943
+    },
+    {
+      "lang": "ell_Grek",
+      "tokens_per_sentence": 133.935,
+      "prefill_gmacs": 1016.79251456,
+      "ratio_to_eng": 4.973303990401521
+    },
+    {
+      "lang": "mar_Deva",
+      "tokens_per_sentence": 126.147,
+      "prefill_gmacs": 955.939848192,
+      "ratio_to_eng": 4.67566331726428
+    },
+    {
+      "lang": "san_Deva",
+      "tokens_per_sentence": 123.125,
+      "prefill_gmacs": 933.124964352,
+      "ratio_to_eng": 4.564071865500771
+    },
+    {
+      "lang": "hin_Deva",
+      "tokens_per_sentence": 120.527,
+      "prefill_gmacs": 917.916516352,
+      "ratio_to_eng": 4.4896847766472066
+    },
+    {
+      "lang": "npi_Deva",
+      "tokens_per_sentence": 120.512,
+      "prefill_gmacs": 917.916516352,
+      "ratio_to_eng": 4.4896847766472066
+    },
+    {
+      "lang": "mai_Deva",
+      "tokens_per_sentence": 119.707,
+      "prefill_gmacs": 910.31273472,
+      "ratio_to_eng": 4.452493395917056
+    },
+    {
+      "lang": "kas_Deva",
+      "tokens_per_sentence": 119.271,
+      "prefill_gmacs": 902.709248,
+      "ratio_to_eng": 4.415303457651328
+    },
+    {
+      "lang": "awa_Deva",
+      "tokens_per_sentence": 117.5,
+      "prefill_gmacs": 895.106056192,
+      "ratio_to_eng": 4.378114961850021
+    },
+    {
+      "lang": "bho_Deva",
+      "tokens_per_sentence": 117.383,
+      "prefill_gmacs": 887.503159296,
+      "ratio_to_eng": 4.3409279085131365
+    },
+    {
+      "lang": "hne_Deva",
+      "tokens_per_sentence": 114.977,
+      "prefill_gmacs": 872.29825024,
+      "ratio_to_eng": 4.266558129232632
+    },
+    {
+      "lang": "mag_Deva",
+      "tokens_per_sentence": 114.366,
+      "prefill_gmacs": 864.69623808,
+      "ratio_to_eng": 4.229375403289011
+    },
+    {
+      "lang": "tir_Ethi",
+      "tokens_per_sentence": 113.354,
+      "prefill_gmacs": 857.094520832,
+      "ratio_to_eng": 4.1921941198098125
+    },
+    {
+      "lang": "amh_Ethi",
+      "tokens_per_sentence": 110.412,
+      "prefill_gmacs": 834.29113856,
+      "ratio_to_eng": 4.0806589241587465
+    },
+    {
+      "lang": "uig_Arab",
+      "tokens_per_sentence": 101.146,
+      "prefill_gmacs": 765.896916992,
+      "ratio_to_eng": 3.746131230284316
+    },
+    {
+      "lang": "kas_Arab",
+      "tokens_per_sentence": 94.664,
+      "prefill_gmacs": 720.31404032,
+      "ratio_to_eng": 3.523177678600335
+    },
+    {
+      "lang": "ckb_Arab",
+      "tokens_per_sentence": 94.147,
+      "prefill_gmacs": 712.7179264,
+      "ratio_to_eng": 3.486023801945147
+    },
+    {
+      "lang": "nus_Latn",
+      "tokens_per_sentence": 92.557,
+      "prefill_gmacs": 705.122107392,
+      "ratio_to_eng": 3.4488713677543807
+    },
+    {
+      "lang": "kbp_Latn",
+      "tokens_per_sentence": 90.633,
+      "prefill_gmacs": 689.931354112,
+      "ratio_to_eng": 3.374570826766113
+    },
+    {
+      "lang": "knc_Arab",
+      "tokens_per_sentence": 85.945,
+      "prefill_gmacs": 651.959631872,
+      "ratio_to_eng": 3.1888447174228225
+    },
+    {
+      "lang": "urd_Arab",
+      "tokens_per_sentence": 85.931,
+      "prefill_gmacs": 651.959631872,
+      "ratio_to_eng": 3.1888447174228225
+    },
+    {
+      "lang": "bak_Cyrl",
+      "tokens_per_sentence": 85.233,
+      "prefill_gmacs": 644.36617216,
+      "ratio_to_eng": 3.1517038229474292
+    },
+    {
+      "lang": "khk_Cyrl",
+      "tokens_per_sentence": 84.065,
+      "prefill_gmacs": 636.77300736,
+      "ratio_to_eng": 3.114564370936457
+    },
+    {
+      "lang": "kaz_Cyrl",
+      "tokens_per_sentence": 82.187,
+      "prefill_gmacs": 621.587562496,
+      "ratio_to_eng": 3.040289794307779
+    },
+    {
+      "lang": "bel_Cyrl",
+      "tokens_per_sentence": 81.107,
+      "prefill_gmacs": 613.995282432,
+      "ratio_to_eng": 3.0031546696900717
+    },
+    {
+      "lang": "tgk_Cyrl",
+      "tokens_per_sentence": 79.053,
+      "prefill_gmacs": 598.81160704,
+      "ratio_to_eng": 2.9288887478479233
+    },
+    {
+      "lang": "fon_Latn",
+      "tokens_per_sentence": 78.231,
+      "prefill_gmacs": 591.220211712,
+      "ratio_to_eng": 2.8917579506234814
+    },
+    {
+      "lang": "snd_Arab",
+      "tokens_per_sentence": 77.65,
+      "prefill_gmacs": 591.220211712,
+      "ratio_to_eng": 2.8917579506234814
+    },
+    {
+      "lang": "tat_Cyrl",
+      "tokens_per_sentence": 78.292,
+      "prefill_gmacs": 591.220211712,
+      "ratio_to_eng": 2.8917579506234814
+    },
+    {
+      "lang": "min_Arab",
+      "tokens_per_sentence": 75.897,
+      "prefill_gmacs": 576.038305792,
+      "ratio_to_eng": 2.8175006835678618
+    },
+    {
+      "lang": "pbt_Arab",
+      "tokens_per_sentence": 76.391,
+      "prefill_gmacs": 576.038305792,
+      "ratio_to_eng": 2.8175006835678618
+    },
+    {
+      "lang": "kir_Cyrl",
+      "tokens_per_sentence": 75.111,
+      "prefill_gmacs": 568.4477952,
+      "ratio_to_eng": 2.7803742137366845
+    },
+    {
+      "lang": "ydd_Hebr",
+      "tokens_per_sentence": 74.98,
+      "prefill_gmacs": 568.4477952,
+      "ratio_to_eng": 2.7803742137366845
+    },
+    {
+      "lang": "yor_Latn",
+      "tokens_per_sentence": 73.346,
+      "prefill_gmacs": 553.267658752,
+      "ratio_to_eng": 2.7061256014675954
+    },
+    {
+      "lang": "ace_Arab",
+      "tokens_per_sentence": 72.286,
+      "prefill_gmacs": 545.678032896,
+      "ratio_to_eng": 2.6690034590296827
+    },
+    {
+      "lang": "kik_Latn",
+      "tokens_per_sentence": 71.84,
+      "prefill_gmacs": 545.678032896,
+      "ratio_to_eng": 2.6690034590296827
+    },
+    {
+      "lang": "azb_Arab",
+      "tokens_per_sentence": 71.062,
+      "prefill_gmacs": 538.088701952,
+      "ratio_to_eng": 2.631882759056192
+    },
+    {
+      "lang": "bjn_Arab",
+      "tokens_per_sentence": 71.013,
+      "prefill_gmacs": 538.088701952,
+      "ratio_to_eng": 2.631882759056192
+    },
+    {
+      "lang": "pes_Arab",
+      "tokens_per_sentence": 70.339,
+      "prefill_gmacs": 530.49966592,
+      "ratio_to_eng": 2.594763501547123
+    },
+    {
+      "lang": "tha_Thai",
+      "tokens_per_sentence": 69.62,
+      "prefill_gmacs": 530.49966592,
+      "ratio_to_eng": 2.594763501547123
+    },
+    {
+      "lang": "tum_Latn",
+      "tokens_per_sentence": 68.651,
+      "prefill_gmacs": 522.9109248,
+      "ratio_to_eng": 2.5576456865024757
+    },
+    {
+      "lang": "azj_Latn",
+      "tokens_per_sentence": 68.03,
+      "prefill_gmacs": 515.322478592,
+      "ratio_to_eng": 2.5205293139222498
+    },
+    {
+      "lang": "prs_Arab",
+      "tokens_per_sentence": 67.778,
+      "prefill_gmacs": 515.322478592,
+      "ratio_to_eng": 2.5205293139222498
+    },
+    {
+      "lang": "ukr_Cyrl",
+      "tokens_per_sentence": 68.222,
+      "prefill_gmacs": 515.322478592,
+      "ratio_to_eng": 2.5205293139222498
+    },
+    {
+      "lang": "arb_Latn",
+      "tokens_per_sentence": 65.937,
+      "prefill_gmacs": 500.146470912,
+      "ratio_to_eng": 2.446300896155063
+    },
+    {
+      "lang": "gla_Latn",
+      "tokens_per_sentence": 64.893,
+      "prefill_gmacs": 492.55890944,
+      "ratio_to_eng": 2.4091888509681016
+    },
+    {
+      "lang": "ibo_Latn",
+      "tokens_per_sentence": 65.066,
+      "prefill_gmacs": 492.55890944,
+      "ratio_to_eng": 2.4091888509681016
+    },
+    {
+      "lang": "ewe_Latn",
+      "tokens_per_sentence": 63.96,
+      "prefill_gmacs": 484.97164288,
+      "ratio_to_eng": 2.3720782482455625
+    },
+    {
+      "lang": "kac_Latn",
+      "tokens_per_sentence": 64.197,
+      "prefill_gmacs": 484.97164288,
+      "ratio_to_eng": 2.3720782482455625
+    },
+    {
+      "lang": "mri_Latn",
+      "tokens_per_sentence": 63.802,
+      "prefill_gmacs": 484.97164288,
+      "ratio_to_eng": 2.3720782482455625
+    },
+    {
+      "lang": "srp_Cyrl",
+      "tokens_per_sentence": 63.669,
+      "prefill_gmacs": 484.97164288,
+      "ratio_to_eng": 2.3720782482455625
+    },
+    {
+      "lang": "gaz_Latn",
+      "tokens_per_sentence": 62.559,
+      "prefill_gmacs": 477.384671232,
+      "ratio_to_eng": 2.334969087987445
+    },
+    {
+      "lang": "aka_Latn",
+      "tokens_per_sentence": 62.433,
+      "prefill_gmacs": 469.797994496,
+      "ratio_to_eng": 2.2978613701937487
+    },
+    {
+      "lang": "gle_Latn",
+      "tokens_per_sentence": 62.236,
+      "prefill_gmacs": 469.797994496,
+      "ratio_to_eng": 2.2978613701937487
+    },
+    {
+      "lang": "lvs_Latn",
+      "tokens_per_sentence": 62.168,
+      "prefill_gmacs": 469.797994496,
+      "ratio_to_eng": 2.2978613701937487
+    },
+    {
+      "lang": "mkd_Cyrl",
+      "tokens_per_sentence": 61.981,
+      "prefill_gmacs": 469.797994496,
+      "ratio_to_eng": 2.2978613701937487
+    },
+    {
+      "lang": "als_Latn",
+      "tokens_per_sentence": 60.741,
+      "prefill_gmacs": 462.211612672,
+      "ratio_to_eng": 2.260755094864474
+    },
+    {
+      "lang": "mlt_Latn",
+      "tokens_per_sentence": 61.159,
+      "prefill_gmacs": 462.211612672,
+      "ratio_to_eng": 2.260755094864474
+    },
+    {
+      "lang": "plt_Latn",
+      "tokens_per_sentence": 60.771,
+      "prefill_gmacs": 462.211612672,
+      "ratio_to_eng": 2.260755094864474
+    },
+    {
+      "lang": "smo_Latn",
+      "tokens_per_sentence": 61.397,
+      "prefill_gmacs": 462.211612672,
+      "ratio_to_eng": 2.260755094864474
+    },
+    {
+      "lang": "tsn_Latn",
+      "tokens_per_sentence": 61.247,
+      "prefill_gmacs": 462.211612672,
+      "ratio_to_eng": 2.260755094864474
+    },
+    {
+      "lang": "tso_Latn",
+      "tokens_per_sentence": 61.043,
+      "prefill_gmacs": 462.211612672,
+      "ratio_to_eng": 2.260755094864474
+    },
+    {
+      "lang": "bem_Latn",
+      "tokens_per_sentence": 59.714,
+      "prefill_gmacs": 454.62552576,
+      "ratio_to_eng": 2.2236502619996212
+    },
+    {
+      "lang": "bul_Cyrl",
+      "tokens_per_sentence": 60.172,
+      "prefill_gmacs": 454.62552576,
+      "ratio_to_eng": 2.2236502619996212
+    },
+    {
+      "lang": "som_Latn",
+      "tokens_per_sentence": 59.651,
+      "prefill_gmacs": 454.62552576,
+      "ratio_to_eng": 2.2236502619996212
+    },
+    {
+      "lang": "sot_Latn",
+      "tokens_per_sentence": 59.882,
+      "prefill_gmacs": 454.62552576,
+      "ratio_to_eng": 2.2236502619996212
+    },
+    {
+      "lang": "tuk_Latn",
+      "tokens_per_sentence": 59.977,
+      "prefill_gmacs": 454.62552576,
+      "ratio_to_eng": 2.2236502619996212
+    },
+    {
+      "lang": "zul_Latn",
+      "tokens_per_sentence": 59.714,
+      "prefill_gmacs": 454.62552576,
+      "ratio_to_eng": 2.2236502619996212
+    },
+    {
+      "lang": "ayr_Latn",
+      "tokens_per_sentence": 58.742,
+      "prefill_gmacs": 447.03973376,
+      "ratio_to_eng": 2.1865468715991896
+    },
+    {
+      "lang": "kmr_Latn",
+      "tokens_per_sentence": 58.979,
+      "prefill_gmacs": 447.03973376,
+      "ratio_to_eng": 2.1865468715991896
+    },
+    {
+      "lang": "knc_Latn",
+      "tokens_per_sentence": 59.03,
+      "prefill_gmacs": 447.03973376,
+      "ratio_to_eng": 2.1865468715991896
+    },
+    {
+      "lang": "nso_Latn",
+      "tokens_per_sentence": 59.109,
+      "prefill_gmacs": 447.03973376,
+      "ratio_to_eng": 2.1865468715991896
+    },
+    {
+      "lang": "ssw_Latn",
+      "tokens_per_sentence": 58.57,
+      "prefill_gmacs": 447.03973376,
+      "ratio_to_eng": 2.1865468715991896
+    },
+    {
+      "lang": "uzn_Latn",
+      "tokens_per_sentence": 58.569,
+      "prefill_gmacs": 447.03973376,
+      "ratio_to_eng": 2.1865468715991896
+    },
+    {
+      "lang": "bam_Latn",
+      "tokens_per_sentence": 58.159,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "cym_Latn",
+      "tokens_per_sentence": 57.59,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "fij_Latn",
+      "tokens_per_sentence": 58.435,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "hun_Latn",
+      "tokens_per_sentence": 57.888,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "kab_Latn",
+      "tokens_per_sentence": 58.212,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "kin_Latn",
+      "tokens_per_sentence": 57.572,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "kmb_Latn",
+      "tokens_per_sentence": 57.558,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "ltg_Latn",
+      "tokens_per_sentence": 58.386,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "run_Latn",
+      "tokens_per_sentence": 57.818,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "sna_Latn",
+      "tokens_per_sentence": 57.68,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "twi_Latn",
+      "tokens_per_sentence": 58.465,
+      "prefill_gmacs": 439.454236672,
+      "ratio_to_eng": 2.14944492366318
+    },
+    {
+      "lang": "grn_Latn",
+      "tokens_per_sentence": 56.937,
+      "prefill_gmacs": 431.869034496,
+      "ratio_to_eng": 2.112344418191592
+    },
+    {
+      "lang": "isl_Latn",
+      "tokens_per_sentence": 57.232,
+      "prefill_gmacs": 431.869034496,
+      "ratio_to_eng": 2.112344418191592
+    },
+    {
+      "lang": "slk_Latn",
+      "tokens_per_sentence": 56.593,
+      "prefill_gmacs": 431.869034496,
+      "ratio_to_eng": 2.112344418191592
+    },
+    {
+      "lang": "szl_Latn",
+      "tokens_per_sentence": 57.136,
+      "prefill_gmacs": 431.869034496,
+      "ratio_to_eng": 2.112344418191592
+    },
+    {
+      "lang": "ces_Latn",
+      "tokens_per_sentence": 56.372,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "fao_Latn",
+      "tokens_per_sentence": 55.951,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "lit_Latn",
+      "tokens_per_sentence": 55.717,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "mos_Latn",
+      "tokens_per_sentence": 55.658,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "nya_Latn",
+      "tokens_per_sentence": 56.318,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "quy_Latn",
+      "tokens_per_sentence": 56.298,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "sag_Latn",
+      "tokens_per_sentence": 55.748,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "tgl_Latn",
+      "tokens_per_sentence": 55.792,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "xho_Latn",
+      "tokens_per_sentence": 55.507,
+      "prefill_gmacs": 424.284127232,
+      "ratio_to_eng": 2.075245355184425
+    },
+    {
+      "lang": "dik_Latn",
+      "tokens_per_sentence": 54.796,
+      "prefill_gmacs": 416.69951488,
+      "ratio_to_eng": 2.0381477346416803
+    },
+    {
+      "lang": "ilo_Latn",
+      "tokens_per_sentence": 55.464,
+      "prefill_gmacs": 416.69951488,
+      "ratio_to_eng": 2.0381477346416803
+    },
+    {
+      "lang": "lmo_Latn",
+      "tokens_per_sentence": 54.706,
+      "prefill_gmacs": 416.69951488,
+      "ratio_to_eng": 2.0381477346416803
+    },
+    {
+      "lang": "tpi_Latn",
+      "tokens_per_sentence": 55.275,
+      "prefill_gmacs": 416.69951488,
+      "ratio_to_eng": 2.0381477346416803
+    },
+    {
+      "lang": "ace_Latn",
+      "tokens_per_sentence": 53.622,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "dyu_Latn",
+      "tokens_per_sentence": 53.596,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "fin_Latn",
+      "tokens_per_sentence": 53.907,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "kam_Latn",
+      "tokens_per_sentence": 54.17,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "kon_Latn",
+      "tokens_per_sentence": 53.906,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "ltz_Latn",
+      "tokens_per_sentence": 53.538,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "lus_Latn",
+      "tokens_per_sentence": 53.69,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "srd_Latn",
+      "tokens_per_sentence": 53.663,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "taq_Latn",
+      "tokens_per_sentence": 54.092,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "umb_Latn",
+      "tokens_per_sentence": 54.42,
+      "prefill_gmacs": 409.11519744,
+      "ratio_to_eng": 2.001051556563357
+    },
+    {
+      "lang": "bug_Latn",
+      "tokens_per_sentence": 53.137,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "crh_Latn",
+      "tokens_per_sentence": 53.112,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "hau_Latn",
+      "tokens_per_sentence": 53.061,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "lij_Latn",
+      "tokens_per_sentence": 53.305,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "lua_Latn",
+      "tokens_per_sentence": 52.821,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "lug_Latn",
+      "tokens_per_sentence": 53.063,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "scn_Latn",
+      "tokens_per_sentence": 53.171,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "swh_Latn",
+      "tokens_per_sentence": 52.849,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "war_Latn",
+      "tokens_per_sentence": 52.929,
+      "prefill_gmacs": 401.531174912,
+      "ratio_to_eng": 1.9639568209494556
+    },
+    {
+      "lang": "ceb_Latn",
+      "tokens_per_sentence": 52.279,
+      "prefill_gmacs": 393.947447296,
+      "ratio_to_eng": 1.9268635277999757
+    },
+    {
+      "lang": "cjk_Latn",
+      "tokens_per_sentence": 52.423,
+      "prefill_gmacs": 393.947447296,
+      "ratio_to_eng": 1.9268635277999757
+    },
+    {
+      "lang": "wol_Latn",
+      "tokens_per_sentence": 52.062,
+      "prefill_gmacs": 393.947447296,
+      "ratio_to_eng": 1.9268635277999757
+    },
+    {
+      "lang": "bos_Latn",
+      "tokens_per_sentence": 50.661,
+      "prefill_gmacs": 386.364014592,
+      "ratio_to_eng": 1.8897716771149171
+    },
+    {
+      "lang": "est_Latn",
+      "tokens_per_sentence": 50.592,
+      "prefill_gmacs": 386.364014592,
+      "ratio_to_eng": 1.8897716771149171
+    },
+    {
+      "lang": "eus_Latn",
+      "tokens_per_sentence": 50.943,
+      "prefill_gmacs": 386.364014592,
+      "ratio_to_eng": 1.8897716771149171
+    },
+    {
+      "lang": "lin_Latn",
+      "tokens_per_sentence": 50.676,
+      "prefill_gmacs": 386.364014592,
+      "ratio_to_eng": 1.8897716771149171
+    },
+    {
+      "lang": "ron_Latn",
+      "tokens_per_sentence": 50.779,
+      "prefill_gmacs": 386.364014592,
+      "ratio_to_eng": 1.8897716771149171
+    },
+    {
+      "lang": "slv_Latn",
+      "tokens_per_sentence": 50.947,
+      "prefill_gmacs": 386.364014592,
+      "ratio_to_eng": 1.8897716771149171
+    },
+    {
+      "lang": "fur_Latn",
+      "tokens_per_sentence": 50.034,
+      "prefill_gmacs": 378.7808768,
+      "ratio_to_eng": 1.8526812688942804
+    },
+    {
+      "lang": "hrv_Latn",
+      "tokens_per_sentence": 49.85,
+      "prefill_gmacs": 378.7808768,
+      "ratio_to_eng": 1.8526812688942804
+    },
+    {
+      "lang": "ban_Latn",
+      "tokens_per_sentence": 48.512,
+      "prefill_gmacs": 371.19803392,
+      "ratio_to_eng": 1.8155923031380652
+    },
+    {
+      "lang": "epo_Latn",
+      "tokens_per_sentence": 48.956,
+      "prefill_gmacs": 371.19803392,
+      "ratio_to_eng": 1.8155923031380652
+    },
+    {
+      "lang": "lim_Latn",
+      "tokens_per_sentence": 48.998,
+      "prefill_gmacs": 371.19803392,
+      "ratio_to_eng": 1.8155923031380652
+    },
+    {
+      "lang": "luo_Latn",
+      "tokens_per_sentence": 49.321,
+      "prefill_gmacs": 371.19803392,
+      "ratio_to_eng": 1.8155923031380652
+    },
+    {
+      "lang": "oci_Latn",
+      "tokens_per_sentence": 49.435,
+      "prefill_gmacs": 371.19803392,
+      "ratio_to_eng": 1.8155923031380652
+    },
+    {
+      "lang": "sun_Latn",
+      "tokens_per_sentence": 49.132,
+      "prefill_gmacs": 371.19803392,
+      "ratio_to_eng": 1.8155923031380652
+    },
+    {
+      "lang": "fuv_Latn",
+      "tokens_per_sentence": 47.779,
+      "prefill_gmacs": 363.615485952,
+      "ratio_to_eng": 1.7785047798462716
+    },
+    {
+      "lang": "min_Latn",
+      "tokens_per_sentence": 48.222,
+      "prefill_gmacs": 363.615485952,
+      "ratio_to_eng": 1.7785047798462716
+    },
+    {
+      "lang": "pol_Latn",
+      "tokens_per_sentence": 48.17,
+      "prefill_gmacs": 363.615485952,
+      "ratio_to_eng": 1.7785047798462716
+    },
+    {
+      "lang": "rus_Cyrl",
+      "tokens_per_sentence": 47.896,
+      "prefill_gmacs": 363.615485952,
+      "ratio_to_eng": 1.7785047798462716
+    },
+    {
+      "lang": "hat_Latn",
+      "tokens_per_sentence": 46.919,
+      "prefill_gmacs": 356.033232896,
+      "ratio_to_eng": 1.7414186990188998
+    },
+    {
+      "lang": "jav_Latn",
+      "tokens_per_sentence": 46.852,
+      "prefill_gmacs": 356.033232896,
+      "ratio_to_eng": 1.7414186990188998
+    },
+    {
+      "lang": "kea_Latn",
+      "tokens_per_sentence": 46.563,
+      "prefill_gmacs": 356.033232896,
+      "ratio_to_eng": 1.7414186990188998
+    },
+    {
+      "lang": "pap_Latn",
+      "tokens_per_sentence": 47.204,
+      "prefill_gmacs": 356.033232896,
+      "ratio_to_eng": 1.7414186990188998
+    },
+    {
+      "lang": "afr_Latn",
+      "tokens_per_sentence": 45.757,
+      "prefill_gmacs": 348.451274752,
+      "ratio_to_eng": 1.7043340606559494
+    },
+    {
+      "lang": "ary_Arab",
+      "tokens_per_sentence": 46.246,
+      "prefill_gmacs": 348.451274752,
+      "ratio_to_eng": 1.7043340606559494
+    },
+    {
+      "lang": "bjn_Latn",
+      "tokens_per_sentence": 46.363,
+      "prefill_gmacs": 348.451274752,
+      "ratio_to_eng": 1.7043340606559494
+    },
+    {
+      "lang": "cat_Latn",
+      "tokens_per_sentence": 46.057,
+      "prefill_gmacs": 348.451274752,
+      "ratio_to_eng": 1.7043340606559494
+    },
+    {
+      "lang": "vec_Latn",
+      "tokens_per_sentence": 45.892,
+      "prefill_gmacs": 348.451274752,
+      "ratio_to_eng": 1.7043340606559494
+    },
+    {
+      "lang": "aeb_Arab",
+      "tokens_per_sentence": 45.016,
+      "prefill_gmacs": 340.86961152,
+      "ratio_to_eng": 1.6672508647574207
+    },
+    {
+      "lang": "ars_Arab",
+      "tokens_per_sentence": 44.563,
+      "prefill_gmacs": 340.86961152,
+      "ratio_to_eng": 1.6672508647574207
+    },
+    {
+      "lang": "arz_Arab",
+      "tokens_per_sentence": 44.599,
+      "prefill_gmacs": 340.86961152,
+      "ratio_to_eng": 1.6672508647574207
+    },
+    {
+      "lang": "acm_Arab",
+      "tokens_per_sentence": 44.175,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "acq_Arab",
+      "tokens_per_sentence": 44.491,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "arb_Arab",
+      "tokens_per_sentence": 44.458,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "dan_Latn",
+      "tokens_per_sentence": 44.127,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "ita_Latn",
+      "tokens_per_sentence": 44.373,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "kor_Hang",
+      "tokens_per_sentence": 44.486,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "nno_Latn",
+      "tokens_per_sentence": 44.496,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "tur_Latn",
+      "tokens_per_sentence": 44.331,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "zsm_Latn",
+      "tokens_per_sentence": 43.89,
+      "prefill_gmacs": 333.2882432,
+      "ratio_to_eng": 1.6301691113233137
+    },
+    {
+      "lang": "apc_Arab",
+      "tokens_per_sentence": 42.997,
+      "prefill_gmacs": 325.707169792,
+      "ratio_to_eng": 1.593088800353628
+    },
+    {
+      "lang": "ast_Latn",
+      "tokens_per_sentence": 42.828,
+      "prefill_gmacs": 325.707169792,
+      "ratio_to_eng": 1.593088800353628
+    },
+    {
+      "lang": "deu_Latn",
+      "tokens_per_sentence": 42.547,
+      "prefill_gmacs": 325.707169792,
+      "ratio_to_eng": 1.593088800353628
+    },
+    {
+      "lang": "fra_Latn",
+      "tokens_per_sentence": 43.176,
+      "prefill_gmacs": 325.707169792,
+      "ratio_to_eng": 1.593088800353628
+    },
+    {
+      "lang": "nld_Latn",
+      "tokens_per_sentence": 43.416,
+      "prefill_gmacs": 325.707169792,
+      "ratio_to_eng": 1.593088800353628
+    },
+    {
+      "lang": "swe_Latn",
+      "tokens_per_sentence": 42.727,
+      "prefill_gmacs": 325.707169792,
+      "ratio_to_eng": 1.593088800353628
+    },
+    {
+      "lang": "ajp_Arab",
+      "tokens_per_sentence": 42.256,
+      "prefill_gmacs": 318.126391296,
+      "ratio_to_eng": 1.5560099318483642
+    },
+    {
+      "lang": "glg_Latn",
+      "tokens_per_sentence": 42.122,
+      "prefill_gmacs": 318.126391296,
+      "ratio_to_eng": 1.5560099318483642
+    },
+    {
+      "lang": "ind_Latn",
+      "tokens_per_sentence": 42.099,
+      "prefill_gmacs": 318.126391296,
+      "ratio_to_eng": 1.5560099318483642
+    },
+    {
+      "lang": "nob_Latn",
+      "tokens_per_sentence": 42.376,
+      "prefill_gmacs": 318.126391296,
+      "ratio_to_eng": 1.5560099318483642
+    },
+    {
+      "lang": "pag_Latn",
+      "tokens_per_sentence": 42.179,
+      "prefill_gmacs": 318.126391296,
+      "ratio_to_eng": 1.5560099318483642
+    },
+    {
+      "lang": "spa_Latn",
+      "tokens_per_sentence": 41.552,
+      "prefill_gmacs": 318.126391296,
+      "ratio_to_eng": 1.5560099318483642
+    },
+    {
+      "lang": "heb_Hebr",
+      "tokens_per_sentence": 40.225,
+      "prefill_gmacs": 302.96571904,
+      "ratio_to_eng": 1.4818565222311013
+    },
+    {
+      "lang": "por_Latn",
+      "tokens_per_sentence": 39.642,
+      "prefill_gmacs": 302.96571904,
+      "ratio_to_eng": 1.4818565222311013
+    },
+    {
+      "lang": "vie_Latn",
+      "tokens_per_sentence": 39.173,
+      "prefill_gmacs": 295.38582528,
+      "ratio_to_eng": 1.4447819811191023
+    },
+    {
+      "lang": "jpn_Jpan",
+      "tokens_per_sentence": 38.284,
+      "prefill_gmacs": 287.806226432,
+      "ratio_to_eng": 1.407708882471525
+    },
+    {
+      "lang": "zho_Hant",
+      "tokens_per_sentence": 31.277,
+      "prefill_gmacs": 234.757292032,
+      "ratio_to_eng": 1.1482375809422882
+    },
+    {
+      "lang": "yue_Hant",
+      "tokens_per_sentence": 30.284,
+      "prefill_gmacs": 227.18005248,
+      "ratio_to_eng": 1.1111760220100837
+    },
+    {
+      "lang": "eng_Latn",
+      "tokens_per_sentence": 27.293,
+      "prefill_gmacs": 204.450103296,
+      "ratio_to_eng": 1.0
+    },
+    {
+      "lang": "zho_Hans",
+      "tokens_per_sentence": 27.375,
+      "prefill_gmacs": 204.450103296,
+      "ratio_to_eng": 1.0
+    }
+  ]
+}
