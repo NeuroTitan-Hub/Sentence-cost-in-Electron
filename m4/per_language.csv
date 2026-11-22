@@ -1,0 +1,118 @@
+code,language,out_tokens_per_resp,prompt_tokens,ctx,batch,mem_bound,pred_ratio_time,pred_ratio_floor,meas_ratio
+bod_Tibt,Tibetan,3937.1,1590,3559,43.8,True,8.263,2.468,8.077
+pbt_Arab,Southern Pashto,4164.1,616,2698,57.8,True,6.264,1.897,8.002
+tir_Ethi,Tigrinya,3694.9,914,2761,56.5,True,6.411,1.968,6.916
+shn_Mymr,Shan,4667.0,2295,4629,33.7,True,10.747,3.095,6.691
+amh_Ethi,Amharic,2275.6,890,2028,76.9,True,4.708,1.612,4.575
+sin_Sinh,Sinhala,2351.2,1513,2689,58.0,True,6.243,2.071,3.336
+mya_Mymr,Burmese,2393.5,1964,3161,49.3,True,7.34,2.399,2.954
+ory_Orya,Odia,1338.4,2134,2803,55.6,True,6.508,2.483,2.954
+kan_Knda,Kannada,2181.4,1523,2614,59.7,True,6.069,2.049,2.764
+khm_Khmr,Khmer,1976.5,1423,2412,64.7,True,5.6,1.945,2.669
+guj_Gujr,Gujarati,1979.4,1482,2472,63.1,True,5.74,1.989,2.573
+pan_Guru,Eastern Panjabi,1729.1,1601,2465,63.3,True,5.725,2.049,2.478
+tam_Taml,Tamil,1711.3,1345,2200,70.9,True,5.109,1.85,2.478
+tel_Telu,Telugu,1487.8,1539,2283,68.3,True,5.3,1.986,2.478
+mal_Mlym,Malayalam,1290.2,1590,2235,69.8,True,5.189,2.031,2.478
+lao_Laoo,Lao,1632.7,1252,2069,75.4,True,4.803,1.77,2.192
+asm_Beng,Assamese,1606.1,1185,1988,78.5,True,4.616,1.715,2.192
+hye_Armn,Armenian,1408.8,1160,1865,83.7,True,4.33,1.677,2.097
+ben_Beng,Bengali,1332.4,1106,1772,88.0,True,4.114,1.627,2.097
+npi_Deva,Nepali,1380.3,971,1662,93.9,True,3.858,1.521,2.001
+mar_Deva,Marathi,995.8,1017,1515,103.0,True,3.517,1.552,1.906
+ell_Grek,Greek,893.7,1080,1526,102.2,True,3.544,1.626,1.906
+hin_Deva,Hindi,787.6,972,1365,114.2,True,3.17,1.545,1.906
+kat_Geor,Georgian,445.2,1142,1364,114.3,True,3.168,2.02,1.906
+ckb_Arab,Central Kurdish,954.5,759,1236,126.2,True,2.87,1.316,1.715
+snd_Arab,Sindhi,1865.1,626,1558,100.1,True,3.619,1.332,1.62
+ibo_Latn,Igbo,1429.4,524,1239,125.9,True,2.877,1.165,1.62
+tgk_Cyrl,Tajik,1276.9,637,1276,122.3,True,2.962,1.233,1.62
+ssw_Latn,Swati,1566.6,472,1255,124.2,True,2.915,1.151,1.525
+kac_Latn,Jingpho,850.2,517,943,165.5,True,2.189,1.086,1.525
+khk_Cyrl,Halh Mongolian,705.5,678,1030,151.4,True,2.392,1.26,1.525
+kaz_Cyrl,Kazakh,593.3,662,959,162.6,True,2.227,1.275,1.525
+urd_Arab,Urdu,586.6,693,986,158.2,True,2.289,1.313,1.525
+zul_Latn,Zulu,1369.9,481,1166,133.7,True,2.708,1.119,1.43
+bam_Latn,Bambara,1243.9,469,1091,143.0,True,2.533,1.086,1.43
+tsn_Latn,Tswana,1044.6,494,1016,153.5,True,2.359,1.079,1.43
+nya_Latn,Nyanja,940.6,454,924,168.8,True,2.146,1.031,1.43
+arb_Latn,Modern Standard Arabic (Latin),800.5,531,932,167.4,True,2.163,1.1,1.43
+yor_Latn,Yoruba,793.0,591,988,157.9,True,2.293,1.16,1.43
+kir_Cyrl,Kyrgyz,752.0,605,981,158.9,True,2.279,1.177,1.43
+azj_Latn,N. Azerbaijani,701.5,548,899,173.5,True,2.088,1.123,1.43
+mlt_Latn,Maltese,1756.7,493,1371,113.7,True,3.184,1.208,1.334
+xho_Latn,Xhosa,986.0,447,940,165.9,True,2.184,1.03,1.334
+swh_Latn,Swahili,845.4,426,849,183.8,True,1.971,0.997,1.334
+sna_Latn,Shona,840.7,465,885,176.2,True,2.056,1.035,1.334
+tso_Latn,Tsonga,823.8,492,904,172.6,True,2.099,1.061,1.334
+mri_Latn,Maori,816.3,514,922,169.1,True,2.142,1.082,1.334
+hun_Latn,Hungarian,718.4,467,826,188.9,True,1.918,1.036,1.334
+gaz_Latn,West Central Oromo,683.6,504,846,184.4,True,1.964,1.078,1.334
+tha_Thai,Thai,670.1,561,896,174.0,True,2.081,1.141,1.334
+som_Latn,Somali,644.6,481,803,194.2,True,1.865,1.057,1.334
+pes_Arab,Western Persian,563.0,567,848,183.8,True,1.97,1.175,1.334
+fuv_Latn,Fulfulde,1639.5,385,1205,129.5,True,2.798,1.1,1.239
+wol_Latn,Wolof,978.6,420,909,171.6,True,2.111,1.004,1.239
+hau_Latn,Hausa,974.0,428,915,170.5,True,2.124,1.011,1.239
+sot_Latn,Southern Sotho,873.3,483,919,169.7,True,2.135,1.053,1.239
+nso_Latn,Northern Sotho,811.2,476,882,176.8,True,2.048,1.045,1.239
+lug_Latn,Ganda,807.7,428,832,187.6,True,1.931,0.996,1.239
+kin_Latn,Kinyarwanda,802.8,464,865,180.2,True,2.01,1.032,1.239
+hat_Latn,Haitian Creole,731.1,378,744,209.7,True,1.727,0.943,1.239
+plt_Latn,Plateau Malagasy,651.3,490,815,191.3,True,1.894,1.066,1.239
+lvs_Latn,Latvian,647.1,501,825,189.1,True,1.915,1.079,1.239
+ces_Latn,Czech,619.5,454,764,204.1,True,1.774,1.031,1.239
+isl_Latn,Icelandic,571.5,461,747,208.8,True,1.735,1.047,1.239
+uzn_Latn,Northern Uzbek,550.9,472,748,208.7,True,1.736,1.065,1.239
+srp_Cyrl,Serbian,528.7,513,778,200.6,True,1.806,1.122,1.239
+als_Latn,Tosk Albanian,513.8,490,747,208.9,True,1.733,1.098,1.239
+mkd_Cyrl,Macedonian,433.8,500,717,217.7,True,1.664,1.152,1.239
+ukr_Cyrl,Ukrainian,395.7,550,748,208.6,True,1.736,1.254,1.239
+tgl_Latn,Tagalog,253.0,450,576,256,True,1.368,1.301,1.239
+luo_Latn,Luo,763.4,398,779,200.2,True,1.809,0.964,1.144
+ilo_Latn,Ilocano,644.8,447,769,202.7,True,1.787,1.02,1.144
+ary_Arab,Moroccan Arabic,611.4,373,678,229.9,True,1.575,0.939,1.144
+acm_Arab,Mesopotamian Arabic,591.9,356,652,239.2,True,1.514,0.922,1.144
+slk_Latn,Slovak,577.5,456,745,209.4,True,1.73,1.04,1.144
+sun_Latn,Sundanese,566.9,396,679,229.6,True,1.578,0.971,1.144
+lin_Latn,Lingala,550.5,408,684,228.1,True,1.588,0.989,1.144
+kea_Latn,Kabuverdianu,514.8,375,633,246.5,True,1.469,0.956,1.144
+ceb_Latn,Cebuano,486.2,421,664,234.7,True,1.543,1.022,1.144
+est_Latn,Estonian,478.6,408,647,241.0,True,1.503,1.007,1.144
+afr_Latn,Afrikaans,471.4,369,605,256,True,1.408,0.96,1.144
+grn_Latn,Guarani,465.5,459,692,225.5,True,1.606,1.08,1.144
+fin_Latn,Finnish,441.9,435,655,238.0,True,1.522,1.058,1.144
+ron_Latn,Romanian,430.0,409,624,249.8,True,1.45,1.03,1.144
+lit_Latn,Lithuanian,427.1,449,663,235.4,True,1.539,1.086,1.144
+bul_Cyrl,Bulgarian,402.7,485,686,227.3,True,1.594,1.154,1.144
+hrv_Latn,Croatian,401.1,402,602,256,True,1.405,1.037,1.144
+slv_Latn,Slovenian,400.2,411,611,255.4,True,1.418,1.048,1.144
+pol_Latn,Polish,370.7,388,574,256,True,1.365,1.043,1.144
+war_Latn,Waray,340.7,427,597,256,True,1.397,1.123,1.144
+ars_Arab,Najdi Arabic,281.7,359,500,256,True,1.262,1.098,1.144
+eus_Latn,Basque,281.5,411,551,256,True,1.334,1.18,1.144
+arz_Arab,Egyptian Arabic,249.6,359,484,256,True,1.24,1.15,1.144
+ind_Latn,Indonesian,248.7,339,464,256,True,1.211,1.116,1.144
+arb_Arab,Modern Standard Arabic,241.7,358,479,256,True,1.233,1.163,1.144
+zsm_Latn,Standard Malay,241.4,354,474,256,True,1.226,1.156,1.144
+rus_Cyrl,Russian,411.4,386,592,256,True,1.39,1.011,1.121
+fra_Latn,French,288.4,348,492,256,True,1.251,1.071,1.08
+kor_Hang,Korean,520.1,359,619,252.1,True,1.436,0.934,1.048
+jpn_Jpan,Japanese,480.2,309,549,256,True,1.33,0.892,1.048
+dan_Latn,Danish,475.3,356,593,256,True,1.392,0.944,1.048
+heb_Hebr,Hebrew,460.9,324,555,256,True,1.338,0.915,1.048
+jav_Latn,Javanese,451.2,378,603,256,True,1.406,0.979,1.048
+nld_Latn,Dutch,442.2,350,571,256,True,1.361,0.952,1.048
+zho_Hant,Traditional Chinese,436.4,252,470,256,True,1.22,0.842,1.048
+ita_Latn,Italian,407.4,358,561,256,True,1.348,0.979,1.048
+vie_Latn,Vietnamese,399.1,316,515,256,True,1.283,0.933,1.048
+nob_Latn,Norwegian Bokmal,395.3,342,539,256,True,1.317,0.966,1.048
+tur_Latn,Turkish,388.2,357,551,256,True,1.334,0.991,1.048
+swe_Latn,Swedish,366.7,344,528,256,True,1.301,0.989,1.048
+spa_Latn,Spanish,365.9,335,518,256,True,1.287,0.977,1.048
+apc_Arab,North Levantine Arabic,350.1,347,522,256,True,1.292,1.005,1.048
+cat_Latn,Catalan,340.4,371,541,256,True,1.32,1.047,1.048
+deu_Latn,German,330.6,343,508,256,True,1.273,1.017,1.048
+por_Latn,Portuguese,248.3,320,444,256,True,1.183,1.082,1.048
+eng_Latn,English,186.2,220,313,256,True,1.0,1.0,1.0
+zho_Hans,Simplified Chinese,402.7,221,422,256,True,1.153,0.815,0.972

@@ -1,0 +1,123 @@
+language,code,resource,j_per_tok,output_tokens,total_energy_j,accuracy
+Southern Pashto,pbt_Arab,Low,0.84,3747646,3146541.2,40.4
+Tibetan,bod_Tibt,Low,0.85,3543429,3002866.9,21.9
+Shan,shn_Mymr,Low,0.70,4200313,2948722.2,10.6
+Tigrinya,tir_Ethi,Low,0.73,3325414,2413327.9,25.3
+Amharic,amh_Ethi,Low,0.48,2048079,983077.9,42.6
+Sinhala,sin_Sinh,Low,0.35,2116100,740635.0,51.8
+Burmese,mya_Mymr,Low,0.31,2154191,667799.2,46.8
+Kannada,kan_Knda,Low,0.29,1963275,569349.8,72.6
+Khmer,khm_Khmr,Low,0.28,1778891,498089.5,63.0
+Gujarati,guj_Gujr,Low,0.27,1781503,481005.8,69.9
+Eastern Panjabi,pan_Guru,Low,0.26,1556173,404605.0,74.3
+Tamil,tam_Taml,Low,0.26,1540155,400440.3,68.8
+Odia,ory_Orya,Low,0.31,1204527,373403.4,42.1
+Telugu,tel_Telu,Low,0.26,1339006,348141.6,63.9
+Lao,lao_Laoo,Low,0.23,1469386,337958.8,62.2
+Assamese,asm_Beng,Low,0.23,1445450,332453.5,67.1
+Malayalam,mal_Mlym,Low,0.26,1161153,301899.8,74.8
+Sindhi,snd_Arab,Low,0.17,1678582,285358.9,61.0
+Armenian,hye_Armn,Low,0.22,1267931,278944.8,70.1
+Bengali,ben_Beng,High,0.22,1199146,263812.1,78.3
+Nepali,npi_Deva,Low,0.21,1242288,260880.5,33.8
+Swati,ssw_Latn,Low,0.16,1409901,225584.2,22.8
+Maltese,mlt_Latn,High,0.14,1581018,221342.5,58.4
+Igbo,ibo_Latn,Low,0.17,1286472,218700.2,23.0
+Tajik,tgk_Cyrl,Low,0.17,1149221,195367.6,58.0
+Fulfulde,fuv_Latn,Low,0.13,1475561,191822.9,21.6
+Zulu,zul_Latn,High,0.15,1232890,184933.5,28.7
+Marathi,mar_Deva,Low,0.20,896219,179243.8,76.4
+Bambara,bam_Latn,Low,0.15,1119522,167928.3,22.7
+Greek,ell_Grek,High,0.20,804328,160865.6,86.7
+Central Kurdish,ckb_Arab,Low,0.18,859082,154634.8,33.8
+Bengali (Latin),ben_Latn,High,0.16,935815,149730.4,29.9
+Hindi,hin_Deva,High,0.20,708854,141770.8,75.9
+Tswana,tsn_Latn,High,0.15,940184,141027.6,29.2
+Nyanja,nya_Latn,Low,0.15,846511,126976.7,25.0
+Xhosa,xho_Latn,High,0.14,887370,124231.8,29.8
+Jingpho,kac_Latn,Low,0.16,765203,122432.5,25.9
+Nepali (Latin),npi_Latn,Low,0.15,814114,122117.1,39.3
+Wolof,wol_Latn,Low,0.13,880761,114498.9,24.4
+Hausa,hau_Latn,Low,0.13,876624,113961.1,23.9
+Modern Standard Arabic (Latin),arb_Latn,High,0.15,720450,108067.5,36.1
+Yoruba,yor_Latn,Low,0.15,713713,107057.0,23.4
+Swahili,swh_Latn,High,0.14,760846,106518.4,54.0
+Shona,sna_Latn,Low,0.14,756672,105934.1,28.6
+Tsonga,tso_Latn,Low,0.14,741420,103798.8,29.1
+Hindi (Latin),hin_Latn,High,0.14,735045,102906.3,66.7
+Maori,mri_Latn,Low,0.14,734697,102857.6,32.1
+Southern Sotho,sot_Latn,High,0.13,785951,102173.6,32.0
+Halh Mongolian,khk_Cyrl,Low,0.16,634984,101597.4,52.4
+Kyrgyz,kir_Cyrl,Low,0.15,676822,101523.3,47.2
+Northern Sotho,nso_Latn,Low,0.13,730114,94914.8,30.1
+N. Azerbaijani,azj_Latn,Low,0.15,631317,94697.6,70.7
+Ganda,lug_Latn,Low,0.13,726949,94503.4,26.8
+Kinyarwanda,kin_Latn,Low,0.13,722516,93927.1,29.2
+Urdu (Latin),urd_Latn,Low,0.14,656631,91928.3,52.6
+Hungarian,hun_Latn,High,0.14,646556,90517.8,85.8
+Sinhala (Latin),sin_Latn,Low,0.13,675122,87765.9,32.1
+West Central Oromo,gaz_Latn,Low,0.14,615207,86129.0,28.1
+Haitian Creole,hat_Latn,Low,0.13,657970,85536.1,61.4
+Kazakh,kaz_Cyrl,High,0.16,534010,85441.6,68.3
+Urdu,urd_Arab,Low,0.16,527972,84475.5,73.4
+Thai,tha_Thai,High,0.14,603074,84430.4,82.6
+Luo,luo_Latn,Low,0.12,687087,82450.4,24.7
+Somali,som_Latn,Low,0.14,580127,81217.8,32.0
+Georgian,kat_Geor,Low,0.20,400695,80139.0,53.3
+Plateau Malagasy,plt_Latn,Low,0.13,586134,76197.4,36.0
+Latvian,lvs_Latn,High,0.13,582382,75709.7,83.6
+Czech,ces_Latn,High,0.13,557529,72478.8,89.3
+Western Persian,pes_Arab,High,0.14,506687,70936.2,67.4
+Ilocano,ilo_Latn,Low,0.12,580320,69638.4,41.7
+Icelandic,isl_Latn,High,0.13,514387,66870.3,68.3
+Moroccan Arabic,ary_Arab,Low,0.12,550284,66034.1,64.6
+Northern Uzbek,uzn_Latn,High,0.13,495798,64453.7,73.7
+Mesopotamian Arabic,acm_Arab,Low,0.12,532738,63928.6,72.3
+Slovak,slk_Latn,High,0.12,519748,62369.8,78.3
+Serbian,srp_Cyrl,Low,0.13,475857,61861.4,87.6
+Sundanese,sun_Latn,Low,0.12,510165,61219.8,54.8
+Tosk Albanian,als_Latn,High,0.13,462449,60118.4,81.2
+Lingala,lin_Latn,Low,0.12,495406,59448.7,27.9
+Kabuverdianu,kea_Latn,Low,0.12,463288,55594.6,58.7
+Cebuano,ceb_Latn,Low,0.12,437536,52504.3,74.7
+Estonian,est_Latn,High,0.12,430745,51689.4,76.2
+Korean,kor_Hang,High,0.11,468108,51491.9,87.8
+Afrikaans,afr_Latn,High,0.12,424235,50908.2,87.2
+Macedonian,mkd_Cyrl,High,0.13,390445,50757.9,84.0
+Guarani,grn_Latn,Low,0.12,418942,50273.0,34.0
+Finnish,fin_Latn,High,0.12,397741,47728.9,78.4
+Japanese,jpn_Jpan,High,0.11,432197,47541.7,78.2
+Danish,dan_Latn,High,0.11,427814,47059.5,89.0
+Romanian,ron_Latn,High,0.12,386978,46437.4,89.4
+Ukrainian,ukr_Cyrl,High,0.13,356123,46296.0,87.3
+Lithuanian,lit_Latn,High,0.12,384397,46127.6,83.9
+Hebrew,heb_Hebr,High,0.11,414788,45626.7,84.4
+Javanese,jav_Latn,Low,0.11,406097,44670.7,76.1
+Dutch,nld_Latn,High,0.11,397947,43774.2,88.1
+Russian,rus_Cyrl,High,0.12,370275,43559.8,90.9
+Bulgarian,bul_Cyrl,High,0.12,362387,43486.4,89.9
+Croatian,hrv_Latn,High,0.12,360991,43318.9,84.3
+Slovenian,slv_Latn,High,0.12,360206,43224.7,87.2
+Traditional Chinese,zho_Hant,High,0.11,392790,43206.9,88.8
+Italian,ita_Latn,High,0.11,366630,40329.3,90.2
+Polish,pol_Latn,High,0.12,333593,40031.2,84.0
+Vietnamese,vie_Latn,High,0.11,359211,39513.2,88.6
+Norwegian Bokmal,nob_Latn,Low,0.11,355727,39130.0,90.1
+Turkish,tur_Latn,High,0.11,349338,38427.2,85.4
+Simplified Chinese,zho_Hans,High,0.10,362454,36982.7,89.6
+Waray,war_Latn,Low,0.12,306588,36790.6,59.3
+Swedish,swe_Latn,High,0.11,330028,36303.1,89.6
+Spanish,spa_Latn,High,0.11,329321,36225.3,90.8
+North Levantine Arabic,apc_Arab,Low,0.11,315102,34661.2,75.1
+Catalan,cat_Latn,High,0.11,306329,33696.2,89.7
+German,deu_Latn,High,0.11,297520,32727.2,92.1
+Najdi Arabic,ars_Arab,Low,0.12,253562,30427.4,75.2
+Basque,eus_Latn,High,0.12,253348,30401.8,67.6
+Tagalog,tgl_Latn,High,0.13,227736,29605.7,74.6
+French,fra_Latn,High,0.11,259581,29420.4,91.7
+Egyptian Arabic,arz_Arab,Low,0.12,224620,26954.4,81.3
+Indonesian,ind_Latn,High,0.12,223840,26860.8,85.0
+Modern Standard Arabic,arb_Arab,High,0.12,217531,26103.7,80.8
+Standard Malay,zsm_Latn,High,0.12,217255,26070.6,88.1
+Portuguese,por_Latn,High,0.11,223499,24584.9,90.2
+English,eng_Latn,High,0.10,167621,17588.0,94.6

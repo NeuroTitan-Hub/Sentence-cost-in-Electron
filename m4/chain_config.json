@@ -1,0 +1,34 @@
+{
+  "model": "Qwen3-8B",
+  "shapes": {
+    "linear_macs": 7568097280,
+    "attn_macs_per_ctx": 294912,
+    "weight_bytes": 15136194560,
+    "kv_bytes_per_tok": 147456
+  },
+  "e_mac": {
+    "sky130 int8 1.8V (M3a, lower bound)": 1.25e-12,
+    "45nm int8 (Horowitz 2014: 0.2 + 0.03 pJ)": 2.3e-13,
+    "45nm fp16 (Horowitz 2014: 1.1 + 0.4 pJ)": 1.5e-12
+  },
+  "e_bit": {
+    "HBM2 3.95 pJ (O'Connor 2017)": 3.95e-12,
+    "GDDR6 7.5 pJ (Micron, vendor)": 7.5e-12,
+    "DRAM 30 pJ (Horowitz 2014, 20-41 midpoint)": 3e-11
+  },
+  "reference": [
+    "45nm fp16 (Horowitz 2014: 1.1 + 0.4 pJ)",
+    "GDDR6 7.5 pJ (Micron, vendor)"
+  ],
+  "out_sentences": 5,
+  "n_input": [
+    1,
+    20,
+    200
+  ],
+  "batch": [
+    1,
+    64
+  ],
+  "n_eng": 27.293
+}

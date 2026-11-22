@@ -1,0 +1,32 @@
+{
+  "questions": 900,
+  "distinct_passages": 488,
+  "raw_prompt_tokens": {
+    "n": 900,
+    "mean": 211.9,
+    "median": 210.0,
+    "p5": 159,
+    "p95": 276,
+    "min": 128,
+    "max": 417
+  },
+  "chat_template_prompt_tokens": {
+    "n": 900,
+    "mean": 219.9,
+    "median": 218.0,
+    "p5": 167,
+    "p95": 284,
+    "min": 136,
+    "max": 425
+  },
+  "passage_tokens": {
+    "n": 900,
+    "mean": 99.6,
+    "median": 97.0,
+    "p5": 54,
+    "p95": 157,
+    "min": 32,
+    "max": 278
+  },
+  "instruction_plus_primer_tokens": 58
+}
