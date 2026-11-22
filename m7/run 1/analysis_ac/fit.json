@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "model": "qwen3.5-4b-finetune-q4km",
+    "reps": 3,
+    "nsent": 20,
+    "num_ctx": 12288,
+    "maxout": 6000,
+    "langs": [
+      "eng_Latn",
+      "fra_Latn",
+      "deu_Latn",
+      "spa_Latn",
+      "rus_Cyrl",
+      "arb_Arab",
+      "zho_Hans",
+      "jpn_Jpan",
+      "kor_Hang",
+      "hin_Deva",
+      "ben_Beng",
+      "tam_Taml",
+      "tel_Telu",
+      "ory_Orya",
+      "amh_Ethi",
+      "mya_Mymr",
+      "khm_Khmr",
+      "shn_Mymr"
+    ],
+    "prompts": {
+      "read": "Here is a text. Do not answer it. Reply with only the word OK.\n\n{text}",
+      "copy": "Copy the following text exactly, in its original language, with no other words:\n\n{text}"
+    },
+    "started": "2026-11-22T13:14:40",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 595.71, 98.29 W",
+    "ollama": "0.31.2",
+    "idle_w_start": 21.202323943661973,
+    "idle_w_end": 15.683714285714288,
+    "finished": "2026-11-22T14:00:47",
+    "regime": "ac",
+    "t_split": 1795335053.0
+  },
+  "fits": {
+    "energy_j": {
+      "fixed_j_per_request": 30.516356950931147,
+      "j_per_prompt_token": 0.03188357255547708,
+      "se_j_per_prompt_token": 0.003966411790283429,
+      "r2": 0.6687910441507705,
+      "n_points": 34
+    },
+    "energy_above_idle_j": {
+      "fixed_j_per_request": 11.372860953117062,
+      "j_per_prompt_token": 0.024628598742729768,
+      "se_j_per_prompt_token": 0.003201192430862655,
+      "r2": 0.649088264809796,
+      "n_points": 34
+    },
+    "wall_s_read": {
+      "fixed_s_per_request": 0.9029082653617972,
+      "s_per_prompt_token": 0.00034217511981253143,
+      "r2": 0.3875741442686925
+    }
+  },
+  "spearman_energy_vs_tokens": 0.9380804953560371,
+  "log_slope_energy_vs_tokens": 0.9974012088023675,
+  "j_per_output_token_vs_context": {
+    "intercept_j": 1.5994068955863603,
+    "j_per_context_token": 1.79137267625449e-05,
+    "r2": 0.0326952579822094,
+    "se": 2.4359323805407663e-05
+  },
+  "per_output_token_range_j": [
+    1.3224840710786254,
+    1.9785089306486463
+  ]
+}
