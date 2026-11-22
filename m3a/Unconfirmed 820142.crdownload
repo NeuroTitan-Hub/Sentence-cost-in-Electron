@@ -1,0 +1,75 @@
+"""M3a step 2: minimum-energy point (MEP) from the inverter sweep.
+
+Model of one operation (stated assumptions, all visible in the output):
+  a logic path L gates deep, made of gates like our FO4 inverter;
+  per operation, a fraction alpha of the gates switch once (switching energy e_dyn each);
+  every gate leaks for the whole clock period, and the period is the path delay L * tpd.
+
+  E_op(V) = alpha * L * e_dyn(V)  +  L * p_leak(V) * L * tpd(V)
+
+Lowering V cuts switching energy roughly as V^2 but stretches tpd exponentially below threshold,
+so leakage energy per operation rises. The minimum of E_op is the MEP.
+
+Usage: python m3a_analyze.py <inverter_sweep.csv> <out dir>
+"""
+from __future__ import annotations
+
+import csv
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+
+L = 20                                   # logic depth (gates per clock period)
+ALPHAS = [0.02, 0.05, 0.1, 0.2, 0.5]     # activity factors swept, since it is workload dependent
+
+
+def main() -> None:
+    src, out = Path(sys.argv[1]), Path(sys.argv[2])
+    out.mkdir(parents=True, exist_ok=True)
+    rows = [r for r in csv.DictReader(open(src)) if not r["error"] and r["tpd"]]
+    result = {"L": L, "alphas": ALPHAS, "corners": {}}
+    for corner in sorted({r["corner"] for r in rows}):
+        R = sorted((r for r in rows if r["corner"] == corner), key=lambda r: float(r["vdd"]))
+        v = np.array([float(r["vdd"]) for r in R])
+        tpd = np.array([float(r["tpd"]) for r in R])
+        # Leakage: DC value (state-averaged). The in-transient estimate agrees within ~1% at <= 0.7 V but is
+        # noise-dominated at high VDD where periods are a few ns; leakage is negligible there anyway.
+        pleak = np.array([float(r["p_leak_dc"]) for r in R])
+        per = np.array([float(r["period"]) for r in R])
+        ecyc = np.array([float(r["e_cycle"]) for r in R])
+        edyn = (ecyc - pleak * per) / 2
+        leak_frac = pleak * per / ecyc
+        # Switching energy cannot be resolved when leakage over the (long) period is most of the measured energy.
+        ok = leak_frac < 0.5
+        v, tpd, edyn, pleak, leak_frac = v[ok], tpd[ok], edyn[ok], pleak[ok], leak_frac[ok]
+        dropped = [float(r["vdd"]) for r, k in zip(R, ok) if not k]
+        c = {"vdd": v.tolist(), "dropped_unresolved_vdd": dropped, "e_dyn": edyn.tolist(), "tpd": tpd.tolist(), "p_leak": pleak.tolist(), "leak_frac": leak_frac.tolist(), "per_alpha": {}}
+        for a in ALPHAS:
+            e_sw = a * L * edyn
+            e_lk = L * pleak * L * tpd
+            e = e_sw + e_lk
+            i = int(np.argmin(e))
+            i18 = int(np.argmax(v))
+            c["per_alpha"][str(a)] = {
+                "e_op": e.tolist(), "e_switch": e_sw.tolist(), "e_leak": e_lk.tolist(),
+                "mep_vdd": float(v[i]), "mep_e_op": float(e[i]), "mep_freq_hz": float(1 / (L * tpd[i])),
+                "e_op_at_1v8": float(e[i18]), "saving_vs_1v8": float(e[i18] / e[i]),
+                "slowdown_vs_1v8": float(tpd[i] / tpd[i18]),
+                "mep_at_sweep_edge": i in (0, len(v) - 1),
+            }
+        result["corners"][corner] = c
+    (out / "mep.json").write_text(json.dumps(result, indent=2))
+    print(f"L = {L}")
+    for corner, c in result["corners"].items():
+        print(corner, "dropped (switching energy not resolvable):", c["dropped_unresolved_vdd"], " max leak fraction kept:", round(max(c["leak_frac"]), 3))
+    print("corner alpha  MEP_V  E_op(fJ)  E_op@1.8V(fJ)  saving  slowdown  f_MEP     edge?")
+    for corner, c in result["corners"].items():
+        for a, d in c["per_alpha"].items():
+            print(f"{corner:5s} {float(a):5.2f}  {d['mep_vdd']:4.2f}  {d['mep_e_op']*1e15:8.2f}  {d['e_op_at_1v8']*1e15:12.2f}"
+                  f"  {d['saving_vs_1v8']:5.1f}x  {d['slowdown_vs_1v8']:8.0f}x  {d['mep_freq_hz']:9.3e}  {d['mep_at_sweep_edge']}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,163 @@
+"""M3a step 1: sky130 inverter, delay / switching energy / leakage versus supply voltage.
+
+Circuit (same for every point):
+  - a chain of 4 identical inverters; the device under test (DUT) is stage 3
+  - every stage drives the next stage plus 3 dummy inverters (fan-out of 4)
+  - only the DUT has its own supply source, so its energy is measured alone
+  - NMOS W/L = 0.42/0.15 um, PMOS W/L = 0.84/0.15 um (sky130_fd_pr 1.8 V devices)
+  - input edges come from stages 1-2, so the DUT sees realistic slopes
+
+Measured per (corner, VDD):
+  tpd      mean of rise and fall propagation delay of the DUT (50% to 50%)
+  e_cycle  energy drawn from the DUT supply over one full input period
+  p_leak   DUT leakage power, average of input-low and input-high DC states
+  e_dyn    switching energy per transition = (e_cycle - p_leak * period) / 2
+
+Usage:
+  python m3a_inverter_sweep.py <ngspice_con.exe> <sky130 ngspice lib> <out dir>
+"""
+from __future__ import annotations
+
+import csv
+import math
+import re
+import subprocess
+import sys
+import tempfile
+import time
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+CORNERS = ["tt", "ff", "ss"]
+VDDS = [1.8, 1.6, 1.4, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2]
+TEMP_C = 27
+
+DECK = """* M3a inverter sweep corner={corner} vdd={vdd}
+.lib "{lib}" {corner}
+.option temp={temp}
+.subckt inv a y vp
+XMP y a vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XMN y a 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+.ends
+Vdd vdd 0 {vdd}
+Vdut vdut 0 {vdd}
+Vin in 0 PULSE(0 {vdd} {t0} {edge} {edge} {half} {per})
+X1 in n1 vdd inv
+X1a n1 d1a vdd inv
+X1b n1 d1b vdd inv
+X1c n1 d1c vdd inv
+X2 n1 n2 vdd inv
+X2a n2 d2a vdd inv
+X2b n2 d2b vdd inv
+X2c n2 d2c vdd inv
+X3 n2 n3 vdut inv
+X3a n3 d3a vdd inv
+X3b n3 d3b vdd inv
+X3c n3 d3c vdd inv
+X4 n3 n4 vdd inv
+X4a n4 d4a vdd inv
+X4b n4 d4b vdd inv
+X4c n4 d4c vdd inv
+.control
+tran {tstep} {tstop}
+meas tran tr trig v(n2) val={vhalf} td={c0} fall=1 targ v(n3) val={vhalf} td={c0} rise=1
+meas tran tf trig v(n2) val={vhalf} td={c0} rise=1 targ v(n3) val={vhalf} td={c0} fall=1
+meas tran q integ i(Vdut) from={c0} to={c1}
+meas tran qlo integ i(Vdut) from={w1a} to={w1b}
+meas tran qhi integ i(Vdut) from={w2a} to={w2b}
+set tr_v = "$&tr"
+set tf_v = "$&tf"
+set q_v = "$&q"
+set qlo_v = "$&qlo"
+set qhi_v = "$&qhi"
+op
+set ilo_v = "$&i(Vdut)"
+alter Vin dc={vdd}
+op
+set ihi_v = "$&i(Vdut)"
+echo RESULT tr=$tr_v tf=$tf_v q=$q_v qlo=$qlo_v qhi=$qhi_v ilo=$ilo_v ihi=$ihi_v
+quit
+.endc
+.end
+"""
+
+
+def with_junctions(text: str) -> str:
+    """Add source/drain junction geometry to every sky130 MOSFET line.
+
+    The PDK subcircuits default to ad=as=pd=ps=0 (no junction capacitance). We use the PDK's own
+    xschem symbol defaults for nf=1: ad=as=W*0.29, pd=ps=2*(W+0.29), nrd=nrs=0.29/W (um units).
+    """
+    def add(m):
+        w = float(m.group(2))
+        return (f"{m.group(0)} ad={w*0.29:.4g} as={w*0.29:.4g} pd={2*(w+0.29):.4g} ps={2*(w+0.29):.4g}"
+                f" nrd={0.29/w:.4g} nrs={0.29/w:.4g}")
+    return re.sub(r"(sky130_fd_pr__\w+fet\w*) w=([0-9.]+) l=[0-9.]+", add, text)
+
+
+def period_for(vdd: float) -> float:
+    """Input period: long enough for full swings, growing as delay grows at low VDD."""
+    return 2e-9 * math.exp(max(0.0, 0.9 - vdd) / 0.055)
+
+
+def run_point(ngspice: str, lib: str, corner: str, vdd: float) -> dict:
+    """Retry with a 4x longer period if the DUT has not finished switching (measure out of window)."""
+    per = period_for(vdd)
+    for attempt in range(5):
+        r = _run_once(ngspice, lib, corner, vdd, per)
+        if not r.get("error"):
+            r["attempts"] = attempt + 1
+            return r
+        per *= 4
+    return r
+
+
+def _run_once(ngspice: str, lib: str, corner: str, vdd: float, per: float) -> dict:
+    half = per / 2
+    t0 = per / 4
+    edge = per / 200
+    p = dict(corner=corner, vdd=vdd, lib=lib, temp=TEMP_C, per=per, half=half - edge, t0=t0, edge=edge,
+             tstep=per / 4000, tstop=t0 + 3 * per, vhalf=vdd / 2, c0=t0 + per, c1=t0 + 2 * per,
+             w1a=t0 + per * 1.30, w1b=t0 + per * 1.48, w2a=t0 + per * 1.80, w2b=t0 + per * 1.98)
+    with tempfile.TemporaryDirectory() as d:
+        (Path(d) / ".spiceinit").write_text("set ngbehavior=hsa\nset ng_nomodcheck\n")
+        deck = Path(d) / "deck.cir"
+        deck.write_text(with_junctions(DECK.format(**p)))
+        r = subprocess.run([ngspice, "-b", str(deck)], cwd=d, capture_output=True, text=True, timeout=1800)
+    m = re.search(r"RESULT tr=(\S+) tf=(\S+) q=(\S+) qlo=(\S+) qhi=(\S+) ilo=(\S+) ihi=(\S+)", r.stdout)
+    if not m:
+        return {"corner": corner, "vdd": vdd, "error": (r.stdout + r.stderr)[-400:]}
+    tr, tf, q, qlo, qhi, ilo, ihi = (float(x) for x in m.groups())
+    # One 50%-50% delay can be negative at low VDD (switching point drifts from VDD/2 with slow edges);
+    # the mean of rise and fall cancels that offset and is what we report.
+    if tr + tf <= 0 or max(abs(tr), abs(tf)) > per / 20:  # edges must settle well before the quiet windows
+        return {"corner": corner, "vdd": vdd, "error": f"edges not settled in window: tr={tr} tf={tf} per={per}"}
+    e_cycle = -q * vdd
+    p_leak_dc = (abs(ilo) + abs(ihi)) / 2 * vdd
+    # leakage measured inside the transient, in quiet windows (one per output state, 0.18 period each)
+    p_leak = -(qlo + qhi) * vdd / (0.36 * per)
+    e_dyn = (e_cycle - p_leak * per) / 2
+    return {"corner": corner, "vdd": vdd, "tpd": (tr + tf) / 2, "tr": tr, "tf": tf, "period": per,
+            "e_cycle": e_cycle, "p_leak": p_leak, "p_leak_dc": p_leak_dc, "e_dyn": e_dyn, "error": ""}
+
+
+def main() -> None:
+    ngspice, lib, out = sys.argv[1], sys.argv[2], Path(sys.argv[3])
+    out.mkdir(parents=True, exist_ok=True)
+    jobs = [(c, v) for c in CORNERS for v in VDDS]
+    t = time.time()
+    with ThreadPoolExecutor(max_workers=12) as ex:
+        res = list(ex.map(lambda cv: run_point(ngspice, lib, *cv), jobs))
+    keys = ["corner", "vdd", "tpd", "tr", "tf", "period", "e_cycle", "p_leak", "p_leak_dc", "e_dyn", "attempts", "error"]
+    with open(out / "inverter_sweep.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=keys)
+        w.writeheader()
+        for r in res:
+            if "tpd" not in r and not r.get("error"):
+                r["error"] = "no result"
+            w.writerow({k: r.get(k, "") for k in keys})
+    print(f"{len(res)} points in {time.time() - t:.0f} s; errors: {sum(1 for r in res if r.get('error'))}")
+
+
+if __name__ == "__main__":
+    main()

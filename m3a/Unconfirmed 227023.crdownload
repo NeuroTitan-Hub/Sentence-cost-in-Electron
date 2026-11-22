@@ -1,0 +1,56 @@
+"""M3a step 4: energy of an 8-bit multiply-add, composed from the simulated full adder.
+
+Composition (stated, textbook structure; a model built on measured parts, not a simulation of the whole MAC):
+  - 8x8 unsigned array multiplier: N(N-1) = 56 full adders (+ 64 AND gates, NOT counted: lower bound)
+  - 16-bit ripple accumulator: 16 full adders
+  => 72 full adders switching with random data, each costing the measured energy per addition
+  - critical path: about 2N-2 = 14 adder delays through the array + 16 through the accumulator = 30 carry delays
+  - leakage: all 72 adders leak for the whole cycle (cycle = critical path delay)
+
+  E_MAC(V) = 72 * E_add(V) + 72 * P_leak(V) * 30 * t_carry(V)
+
+Only points where the adder's switching energy was resolvable (leakage < half the measured energy) are used.
+
+Usage: python m3a_mac_compose.py <fulladder_sweep.csv> <out dir>
+"""
+from __future__ import annotations
+
+import csv
+import json
+import sys
+from pathlib import Path
+
+N_FA = 72
+PATH = 30
+
+
+def main() -> None:
+    src, out = Path(sys.argv[1]), Path(sys.argv[2])
+    rows = [r for r in csv.DictReader(open(src)) if not r["error"]]
+    res = {"n_fa": N_FA, "path": PATH, "corners": {}}
+    for corner in ("tt", "ff", "ss"):
+        R = sorted((r for r in rows if r["corner"] == corner), key=lambda r: -float(r["vdd"]))
+        pts = []
+        for r in R:
+            v, e, p, t, lf = (float(r[k]) for k in ("vdd", "e_add", "p_leak", "tpd", "leak_frac"))
+            resolved = lf < 0.5
+            e_sw, e_lk = N_FA * e, N_FA * p * PATH * t
+            pts.append({"vdd": v, "resolved": resolved, "e_mac": e_sw + e_lk, "e_switch": e_sw, "e_leak": e_lk,
+                        "cycle_s": PATH * t, "macs_per_s": 1 / (PATH * t)})
+        good = [x for x in pts if x["resolved"]]
+        best = min(good, key=lambda x: x["e_mac"])
+        top = good[0]
+        res["corners"][corner] = {"points": pts, "best": best, "at_1v8": top,
+                                  "best_at_edge": best is good[-1],
+                                  "saving": top["e_mac"] / best["e_mac"], "slowdown": best["cycle_s"] / top["cycle_s"]}
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "mac.json").write_text(json.dumps(res, indent=2))
+    print("corner  E_MAC@1.8V   best V  E_MAC@best  saving  slowdown  MAC/s@best   at edge?")
+    for c, d in res["corners"].items():
+        print(f"{c:5s} {d['at_1v8']['e_mac']*1e15:9.1f} fJ  {d['best']['vdd']:5.2f}  {d['best']['e_mac']*1e15:8.1f} fJ"
+              f"  {d['saving']:5.1f}x  {d['slowdown']:7.0f}x  {d['best']['macs_per_s']:9.3e}  {d['best_at_edge']}")
+        print("      E_MAC by V:", [(x["vdd"], round(x["e_mac"] * 1e15, 1)) for x in d["points"] if x["resolved"]])
+
+
+if __name__ == "__main__":
+    main()

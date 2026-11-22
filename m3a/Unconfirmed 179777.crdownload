@@ -1,0 +1,199 @@
+"""M3a step 3: 28-transistor mirror full adder on sky130, energy / delay / leakage versus supply.
+
+Circuit: textbook mirror adder (carry stage 10T, sum stage 14T, two output inverters 4T).
+NMOS W/L 0.42/0.15 um, PMOS 0.84/0.15 um, not optimised. Each output drives 4 inverters (FO4).
+Inputs come through two inverters (realistic edges).
+
+Three copies of the adder in one deck, each with its own supply:
+  E  (energy):  16 random input vectors (fixed seed), one per period; supply charge integrated;
+                outputs sampled at the end of every period and checked against A+B+Cin.
+  D  (delay):   A=1, B=0, Cin toggles (carry propagate, the ripple-carry critical path);
+                delay Cin -> Cout, mean of rise and fall.
+  K  (leakage): DC inputs; supply current averaged over all 8 input states.
+
+energy per addition = (E-copy energy over 16 periods - mean leakage x 16 periods) / 16
+
+Usage: python m3a_fulladder_sweep.py <ngspice_con.exe> <sky130 lib> <out dir>
+"""
+from __future__ import annotations
+
+import csv
+import math
+import random
+import re
+import subprocess
+import sys
+import tempfile
+import time
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+
+CORNERS = ["tt", "ff", "ss"]
+VDDS = [1.8, 1.4, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.45, 0.4, 0.35, 0.3]
+TEMP_C = 27
+NVEC = 16
+random.seed(20261119)
+VECTORS = [(random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)) for _ in range(NVEC)]
+
+SUBCKTS = """
+.subckt inv a y vp
+XMP y a vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XMN y a 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+.ends
+.subckt fa a b c s co vp
+* carry: cob = not(ab + c(a+b))
+XP1 p1 a vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP2 p1 b vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP3 cob c p1 vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP4 p2 a vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP5 cob b p2 vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XN1 n1 a 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN2 n1 b 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN3 cob c n1 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN4 n2 a 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN5 cob b n2 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+* sum: sb = not(abc + cob(a+b+c))
+XP6 p3 a vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP7 p3 b vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP8 p3 c vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP9 sb cob p3 vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP10 p4 a vp vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP11 p5 b p4 vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XP12 sb c p5 vp sky130_fd_pr__pfet_01v8 w=0.84 l=0.15
+XN6 n3 a 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN7 n3 b 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN8 n3 c 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN9 sb cob n3 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN10 n4 a 0 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN11 n5 b n4 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+XN12 sb c n5 0 sky130_fd_pr__nfet_01v8 w=0.42 l=0.15
+* output inverters
+XI1 cob co vp inv
+XI2 sb s vp inv
+.ends
+.subckt load4 a vp
+XL1 a l1 vp inv
+XL2 a l2 vp inv
+XL3 a l3 vp inv
+XL4 a l4 vp inv
+.ends
+"""
+
+
+def with_junctions(text: str) -> str:
+    """Add source/drain junction geometry to every sky130 MOSFET line.
+
+    The PDK subcircuits default to ad=as=pd=ps=0 (no junction capacitance). We use the PDK's own
+    xschem symbol defaults for nf=1: ad=as=W*0.29, pd=ps=2*(W+0.29), nrd=nrs=0.29/W (um units).
+    """
+    def add(m):
+        w = float(m.group(2))
+        return (f"{m.group(0)} ad={w*0.29:.4g} as={w*0.29:.4g} pd={2*(w+0.29):.4g} ps={2*(w+0.29):.4g}"
+                f" nrd={0.29/w:.4g} nrs={0.29/w:.4g}")
+    return re.sub(r"(sky130_fd_pr__\w+fet\w*) w=([0-9.]+) l=[0-9.]+", add, text)
+
+
+def pwl(bits: list[int], vdd: float, t0: float, per: float, edge: float) -> str:
+    pts = [f"0 {vdd * bits[0]:.6g}"]
+    for k in range(1, len(bits)):
+        t = t0 + k * per
+        pts.append(f"{t:.6e} {vdd * bits[k - 1]:.6g}")
+        pts.append(f"{t + edge:.6e} {vdd * bits[k]:.6g}")
+    return "PWL(" + " ".join(pts) + ")"
+
+
+def deck(lib: str, corner: str, vdd: float, per: float) -> str:
+    edge, t0 = per / 200, per / 4
+    a, b, c = ([v[i] for v in VECTORS] for i in range(3))
+    # Raw sources feed two inverters, so the adder sees buffered edges of the same polarity.
+    lines = [f"* M3a full adder corner={corner} vdd={vdd}", f'.lib "{lib}" {corner}', f".option temp={TEMP_C}", SUBCKTS,
+             f"Vdd vdd 0 {vdd}", f"Ve ve 0 {vdd}", f"Vd vd 0 {vdd}", f"Vk vk 0 {vdd}",
+             f"Vra ra 0 {pwl(a, vdd, t0, per, edge)}", f"Vrb rb 0 {pwl(b, vdd, t0, per, edge)}",
+             f"Vrc rc 0 {pwl(c, vdd, t0, per, edge)}"]
+    for x in "abc":
+        lines += [f"XB1{x} r{x} i{x} vdd inv", f"XB2{x} i{x} e{x} vdd inv"]
+    lines += ["XE ea eb ec es eco ve fa", "XLES es vdd load4", "XLEC eco vdd load4"]
+    # delay copy: A=1, B=0, Cin toggles once per period
+    lines += [f"Vdc dcr 0 PULSE(0 {vdd} {t0} {edge} {edge} {per / 2 - edge} {per})",
+              "XDB1 dcr dci vdd inv", "XDB2 dci dcc vdd inv",
+              "XD vd 0 dcc ds dco vd fa", "XLDS ds vdd load4", "XLDC dco vdd load4"]
+    # leakage copy: DC inputs
+    lines += ["Vka ka 0 0", "Vkb kb 0 0", "Vkc kc 0 0", "XK ka kb kc ks kco vk fa", "XLKS ks vdd load4", "XLKC kco vdd load4"]
+    tstop = t0 + NVEC * per
+    vh = vdd / 2
+    ctl = [".control", f"tran {per / 1000:.4e} {tstop:.4e}",
+           f"meas tran qe integ i(Ve) from={t0:.4e} to={tstop:.4e}",
+           f"meas tran dr trig v(dcc) val={vh} td={t0 + per:.4e} rise=1 targ v(dco) val={vh} td={t0 + per:.4e} rise=1",
+           f"meas tran df trig v(dcc) val={vh} td={t0 + per:.4e} fall=1 targ v(dco) val={vh} td={t0 + per:.4e} fall=1"]
+    for k in range(NVEC):
+        ts = t0 + (k + 1) * per - per * 0.02
+        ctl += [f"meas tran s{k} find v(es) at={ts:.4e}", f"meas tran c{k} find v(eco) at={ts:.4e}"]
+    ctl += ['set out = "R qe=$&qe dr=$&dr df=$&df"']
+    for k in range(NVEC):
+        ctl += [f'set out = "$out s{k}=$&s{k} c{k}=$&c{k}"']
+    for st in range(8):
+        ctl += [f"alter Vka dc={vdd * (st & 1)}", f"alter Vkb dc={vdd * ((st >> 1) & 1)}",
+                f"alter Vkc dc={vdd * ((st >> 2) & 1)}", "op", f'set out = "$out k{st}=$&i(Vk)"']
+    ctl += ["echo $out", "quit", ".endc", ".end"]
+    return "\n".join(lines + ctl) + "\n"
+
+
+def run_once(ngspice: str, lib: str, corner: str, vdd: float, per: float) -> dict:
+    with tempfile.TemporaryDirectory() as d:
+        (Path(d) / ".spiceinit").write_text("set ngbehavior=hsa\nset ng_nomodcheck\n")
+        (Path(d) / "deck.cir").write_text(with_junctions(deck(lib, corner, vdd, per)))
+        r = subprocess.run([ngspice, "-b", "deck.cir"], cwd=d, capture_output=True, text=True, timeout=3600)
+    i0 = r.stdout.lower().find("r qe=")  # ngspice lowercases echoed text
+    i1 = r.stdout.find("ngspice-47 done", i0)
+    line = r.stdout[i0:i1 if i1 > 0 else None] if i0 >= 0 else None  # echo output may wrap over lines
+    if not line:
+        return {"error": "no result: " + (r.stdout + r.stderr)[-300:]}
+    kv = dict(re.findall(r"(\w+)=(\S+)", line))
+    try:
+        qe, dr, df = float(kv["qe"]), float(kv["dr"]), float(kv["df"])
+        kavg = sum(abs(float(kv[f"k{st}"])) for st in range(8)) / 8
+    except (KeyError, ValueError):
+        return {"error": "missing measure: " + line[:200]}
+    wrong = 0
+    for k, (a, b, c) in enumerate(VECTORS):
+        s_exp, c_exp = (a + b + c) & 1, (a + b + c) >> 1
+        s_got, c_got = float(kv[f"s{k}"]) > vdd / 2, float(kv[f"c{k}"]) > vdd / 2
+        wrong += (s_got != bool(s_exp)) + (c_got != bool(c_exp))
+    tpd = (dr + df) / 2
+    if wrong or dr + df <= 0 or max(abs(dr), abs(df)) > per / 20:
+        return {"error": f"wrong={wrong} dr={dr} df={df} per={per}"}
+    e_total = -qe * vdd
+    p_leak = kavg * vdd
+    leak_frac = p_leak * NVEC * per / e_total
+    return {"tpd": tpd, "dr": dr, "df": df, "period": per, "e_total": e_total, "p_leak": p_leak,
+            "e_add": (e_total - p_leak * NVEC * per) / NVEC, "leak_frac": leak_frac, "wrong": wrong, "error": ""}
+
+
+def run_point(ngspice: str, lib: str, corner: str, vdd: float) -> dict:
+    per = 4e-9 * math.exp(max(0.0, 0.9 - vdd) / 0.055)
+    for attempt in range(5):
+        r = run_once(ngspice, lib, corner, vdd, per)
+        if not r.get("error"):
+            break
+        per *= 4
+    return {"corner": corner, "vdd": vdd, "attempts": attempt + 1, **r}
+
+
+def main() -> None:
+    ngspice, lib, out = sys.argv[1], sys.argv[2], Path(sys.argv[3])
+    out.mkdir(parents=True, exist_ok=True)
+    t = time.time()
+    jobs = [(c, v) for c in CORNERS for v in VDDS]
+    with ThreadPoolExecutor(max_workers=12) as ex:
+        res = list(ex.map(lambda cv: run_point(ngspice, lib, *cv), jobs))
+    keys = ["corner", "vdd", "tpd", "dr", "df", "period", "e_total", "p_leak", "e_add", "leak_frac", "wrong", "attempts", "error"]
+    with open(out / "fulladder_sweep.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=keys)
+        w.writeheader()
+        for r in res:
+            w.writerow({k: r.get(k, "") for k in keys})
+    print(f"{len(res)} points in {time.time() - t:.0f} s; errors: {sum(1 for r in res if r.get('error'))}; vectors: {VECTORS}")
+
+
+if __name__ == "__main__":
+    main()
